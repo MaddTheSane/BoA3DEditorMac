@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		552C91491C061C8500EA1BED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552C91481C061C8500EA1BED /* AppDelegate.swift */; };
+		552C914B1C061C8500EA1BED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 552C914A1C061C8500EA1BED /* Assets.xcassets */; };
+		552C914E1C061C8500EA1BED /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 552C914C1C061C8500EA1BED /* MainMenu.xib */; };
+		552C91531C061F2C00EA1BED /* Blades of Avernum Editor License.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9D8A95FF141D4D9300B69D51 /* Blades of Avernum Editor License.pdf */; };
+		552C91551C06230800EA1BED /* Rect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552C91541C06230800EA1BED /* Rect.swift */; };
 		8D0C4E8D0486CD37000505A6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0867D6AAFE840B52C02AAC07 /* InfoPlist.strings */; };
 		8D0C4E920486CD37000505A6 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20286C33FDCF999611CA2CEA /* Carbon.framework */; };
 		9D2E6DC7152FF00700E5C046 /* Undo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E6DC6152FF00700E5C046 /* Undo.cpp */; };
@@ -87,6 +92,12 @@
 		5048396D09E3307300765E4B /* 3D BoA EditorProj.xcconfig */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xcconfig; path = "3D BoA EditorProj.xcconfig"; sourceTree = "<group>"; };
 		5048396E09E3307300765E4B /* 3D BoA EditorTarget.xcconfig */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xcconfig; path = "3D BoA EditorTarget.xcconfig"; sourceTree = "<group>"; };
 		508344B209E5C41E0093A071 /* 3D BoA Editor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "3D BoA Editor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		552C91461C061C8500EA1BED /* Swift BOA Editor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swift BOA Editor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		552C91481C061C8500EA1BED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		552C914A1C061C8500EA1BED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		552C914D1C061C8500EA1BED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		552C914F1C061C8500EA1BED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		552C91541C06230800EA1BED /* Rect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rect.swift; sourceTree = "<group>"; };
 		8D0C4E960486CD37000505A6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D2E6DC3152FEFF600E5C046 /* Undo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Undo.h; sourceTree = "<group>"; };
 		9D2E6DC6152FF00700E5C046 /* Undo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Undo.cpp; sourceTree = "<group>"; };
@@ -149,6 +160,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		552C91431C061C8500EA1BED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D0C4E910486CD37000505A6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -166,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				508344B209E5C41E0093A071 /* 3D BoA Editor.app */,
+				552C91461C061C8500EA1BED /* Swift BOA Editor.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -177,7 +196,8 @@
 				20286C2AFDCF999611CA2CEA /* Headers */,
 				9DF52BD512CFC73700D01803 /* Sources */,
 				20286C2CFDCF999611CA2CEA /* Resources */,
-				20286C32FDCF999611CA2CEA /* External Frameworks and Libraries */,
+				552C91471C061C8500EA1BED /* Swift BOA Editor */,
+				20286C32FDCF999611CA2CEA /* Frameworks */,
 				195DF8CFFE9D517E11CA2CBB /* Products */,
 			);
 			name = "3D BoA Editor";
@@ -209,7 +229,7 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		20286C32FDCF999611CA2CEA /* External Frameworks and Libraries */ = {
+		20286C32FDCF999611CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				9DF52CA312CFD5C500D01803 /* Sparkle.framework */,
@@ -217,7 +237,7 @@
 				9DF52BC512CFC6DA00D01803 /* libstdc++-static.a */,
 				20286C33FDCF999611CA2CEA /* Carbon.framework */,
 			);
-			name = "External Frameworks and Libraries";
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		5048396909E3304600765E4B /* Configuration Files */ = {
@@ -227,6 +247,18 @@
 				5048396E09E3307300765E4B /* 3D BoA EditorTarget.xcconfig */,
 			);
 			name = "Configuration Files";
+			sourceTree = "<group>";
+		};
+		552C91471C061C8500EA1BED /* Swift BOA Editor */ = {
+			isa = PBXGroup;
+			children = (
+				552C91481C061C8500EA1BED /* AppDelegate.swift */,
+				552C91541C06230800EA1BED /* Rect.swift */,
+				552C914A1C061C8500EA1BED /* Assets.xcassets */,
+				552C914C1C061C8500EA1BED /* MainMenu.xib */,
+				552C914F1C061C8500EA1BED /* Info.plist */,
+			);
+			path = "Swift BOA Editor";
 			sourceTree = "<group>";
 		};
 		9DF52BD512CFC73700D01803 /* Sources */ = {
@@ -293,6 +325,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		552C91451C061C8500EA1BED /* Swift BOA Editor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 552C91501C061C8500EA1BED /* Build configuration list for PBXNativeTarget "Swift BOA Editor" */;
+			buildPhases = (
+				552C91421C061C8500EA1BED /* Sources */,
+				552C91431C061C8500EA1BED /* Frameworks */,
+				552C91441C061C8500EA1BED /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Swift BOA Editor";
+			productName = "Swift BOA Editor";
+			productReference = 552C91461C061C8500EA1BED /* Swift BOA Editor.app */;
+			productType = "com.apple.product-type.application";
+		};
 		8D0C4E890486CD37000505A6 /* 3D BoA Editor */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C0E91AC508A95435008D54AB /* Build configuration list for PBXNativeTarget "3D BoA Editor" */;
@@ -320,7 +369,13 @@
 		20286C28FDCF999611CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0710;
+				TargetAttributes = {
+					552C91451C061C8500EA1BED = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
+				};
 			};
 			buildConfigurationList = C0E91AC908A95435008D54AB /* Build configuration list for PBXProject "3D BoA Editor" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -331,17 +386,29 @@
 				Japanese,
 				French,
 				German,
+				Base,
 			);
 			mainGroup = 20286C29FDCF999611CA2CEA /* 3D BoA Editor */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				8D0C4E890486CD37000505A6 /* 3D BoA Editor */,
+				552C91451C061C8500EA1BED /* Swift BOA Editor */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		552C91441C061C8500EA1BED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				552C914B1C061C8500EA1BED /* Assets.xcassets in Resources */,
+				552C91531C061F2C00EA1BED /* Blades of Avernum Editor License.pdf in Resources */,
+				552C914E1C061C8500EA1BED /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D0C4E8C0486CD37000505A6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -419,6 +486,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		552C91421C061C8500EA1BED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				552C91491C061C8500EA1BED /* AppDelegate.swift in Sources */,
+				552C91551C06230800EA1BED /* Rect.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D0C4E8F0486CD37000505A6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -450,17 +526,111 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
+		552C914C1C061C8500EA1BED /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				552C914D1C061C8500EA1BED /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		552C91511C061C8500EA1BED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Swift BOA Editor/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.github.maddthesane.Swift-BOA-Editor";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		552C91521C061C8500EA1BED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Swift BOA Editor/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.github.maddthesane.Swift-BOA-Editor";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		C0E91AC608A95435008D54AB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5048396E09E3307300765E4B /* 3D BoA EditorTarget.xcconfig */;
 			buildSettings = {
-				ARCHS = (
-					"$(ARCHS_STANDARD_32_64_BIT)",
-					ppc,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -481,10 +651,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5048396E09E3307300765E4B /* 3D BoA EditorTarget.xcconfig */;
 			buildSettings = {
-				ARCHS = (
-					"$(ARCHS_STANDARD_32_64_BIT)",
-					ppc,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -505,6 +672,7 @@
 			baseConfigurationReference = 5048396D09E3307300765E4B /* 3D BoA EditorProj.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_DEBUGGING_SYMBOLS = full;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -514,7 +682,6 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
-				ZERO_LINK = YES;
 			};
 			name = Debug;
 		};
@@ -523,6 +690,7 @@
 			baseConfigurationReference = 5048396D09E3307300765E4B /* 3D BoA EditorProj.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
@@ -534,6 +702,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		552C91501C061C8500EA1BED /* Build configuration list for PBXNativeTarget "Swift BOA Editor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				552C91511C061C8500EA1BED /* Debug */,
+				552C91521C061C8500EA1BED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		C0E91AC508A95435008D54AB /* Build configuration list for PBXNativeTarget "3D BoA Editor" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
