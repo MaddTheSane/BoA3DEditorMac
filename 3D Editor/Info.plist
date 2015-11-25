@@ -50,7 +50,7 @@
 	<key>CFBundleIconFile</key>
 	<string>BoAEdAPPL.icns</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.spidweb.BoA3DEditor</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

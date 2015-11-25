@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 44;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,7 +13,6 @@
 		9D3AB05D137E257000B4F413 /* mode_buttons.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D3AB05C137E257000B4F413 /* mode_buttons.png */; };
 		9D8A9600141D4D9300B69D51 /* Blades of Avernum Editor License.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9D8A95FF141D4D9300B69D51 /* Blades of Avernum Editor License.pdf */; };
 		9DF52BC612CFC6DA00D01803 /* QuickTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DF52BC412CFC6DA00D01803 /* QuickTime.framework */; };
-		9DF52BC712CFC6DA00D01803 /* libstdc++-static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DF52BC512CFC6DA00D01803 /* libstdc++-static.a */; };
 		9DF52BE212CFC74D00D01803 /* Bl A Editor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9DF52BD612CFC74D00D01803 /* Bl A Editor.cpp */; };
 		9DF52BE312CFC74D00D01803 /* Bl A Fileio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9DF52BD712CFC74D00D01803 /* Bl A Fileio.cpp */; };
 		9DF52BE412CFC74D00D01803 /* dlogtool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9DF52BD812CFC74D00D01803 /* dlogtool.cpp */; };
@@ -63,7 +62,7 @@
 		9DF52C3712CFCCA400D01803 /* BoAScen.icns in Resources */ = {isa = PBXBuildFile; fileRef = 9DF52C1212CFCCA400D01803 /* BoAScen.icns */; };
 		9DF52C3812CFCCA400D01803 /* BoAEdAPPL.icns in Resources */ = {isa = PBXBuildFile; fileRef = 9DF52C1412CFCCA400D01803 /* BoAEdAPPL.icns */; };
 		9DF52CA412CFD5C500D01803 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DF52CA312CFD5C500D01803 /* Sparkle.framework */; };
-		9DF52CB512CFD7CF00D01803 /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9DF52CA312CFD5C500D01803 /* Sparkle.framework */; };
+		9DF52CB512CFD7CF00D01803 /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9DF52CA312CFD5C500D01803 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		9DF52D2212CFE6FD00D01803 /* Bl A Editor.r in Rez */ = {isa = PBXBuildFile; fileRef = 9DF52C1312CFCCA400D01803 /* Bl A Editor.r */; };
 /* End PBXBuildFile section */
 
@@ -156,7 +155,6 @@
 			files = (
 				8D0C4E920486CD37000505A6 /* Carbon.framework in Frameworks */,
 				9DF52BC612CFC6DA00D01803 /* QuickTime.framework in Frameworks */,
-				9DF52BC712CFC6DA00D01803 /* libstdc++-static.a in Frameworks */,
 				9DF52CA412CFD5C500D01803 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -321,8 +319,11 @@
 /* Begin PBXProject section */
 		20286C28FDCF999611CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+			};
 			buildConfigurationList = C0E91AC908A95435008D54AB /* Build configuration list for PBXProject "3D BoA Editor" */;
-			compatibilityVersion = "Xcode 3.0";
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -460,6 +461,7 @@
 					"$(ARCHS_STANDARD_32_64_BIT)",
 					ppc,
 				);
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -470,6 +472,7 @@
 					"_GLIBCXX_DEBUG=1",
 					"_GLIBCXX_DEBUG_PEDANTIC=1",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.spidweb.BoA3DEditor;
 				VALID_ARCHS = i386;
 			};
 			name = Debug;
@@ -482,6 +485,7 @@
 					"$(ARCHS_STANDARD_32_64_BIT)",
 					ppc,
 				);
+				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -491,6 +495,7 @@
 				GCC_PREFIX_HEADER = "3D BoA Editor_Prefix.pch";
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRESERVE_DEAD_CODE_INITS_AND_TERMS = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.spidweb.BoA3DEditor;
 				VALID_ARCHS = i386;
 			};
 			name = Release;
@@ -499,16 +504,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5048396D09E3307300765E4B /* 3D BoA EditorProj.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ENABLE_TESTABILITY = YES;
 				GCC_DEBUGGING_SYMBOLS = full;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.3;
-				SDKROOT = macosx10.5;
-				VALID_ARCHS = i386;
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
 				ZERO_LINK = YES;
 			};
 			name = Debug;
@@ -517,14 +522,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5048396D09E3307300765E4B /* 3D BoA EditorProj.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.3;
-				SDKROOT = macosx10.5;
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				SDKROOT = macosx;
 				SEPARATE_STRIP = YES;
-				VALID_ARCHS = i386;
 			};
 			name = Release;
 		};
