@@ -12,6 +12,16 @@
 		552C914E1C061C8500EA1BED /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 552C914C1C061C8500EA1BED /* MainMenu.xib */; };
 		552C91531C061F2C00EA1BED /* Blades of Avernum Editor License.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9D8A95FF141D4D9300B69D51 /* Blades of Avernum Editor License.pdf */; };
 		552C91551C06230800EA1BED /* Rect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552C91541C06230800EA1BED /* Rect.swift */; };
+		552C91591C06295800EA1BED /* ResourceBridging.m in Sources */ = {isa = PBXBuildFile; fileRef = 552C91581C06295800EA1BED /* ResourceBridging.m */; };
+		552C915A1C062A0800EA1BED /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20286C33FDCF999611CA2CEA /* Carbon.framework */; };
+		552C915C1C06326200EA1BED /* Dungeon Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 552C915B1C06326200EA1BED /* Dungeon Bold.ttf */; };
+		552C91631C06327C00EA1BED /* Boink down.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 552C915E1C06327C00EA1BED /* Boink down.aiff */; };
+		552C91641C06327C00EA1BED /* Boink Up.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 552C915F1C06327C00EA1BED /* Boink Up.aiff */; };
+		552C91651C06327C00EA1BED /* button short.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 552C91601C06327C00EA1BED /* button short.aiff */; };
+		552C91661C06327C00EA1BED /* ca-click.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 552C91611C06327C00EA1BED /* ca-click.aiff */; };
+		552C91671C06327C00EA1BED /* poison cough.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 552C91621C06327C00EA1BED /* poison cough.aiff */; };
+		552C91691C06366E00EA1BED /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552C91681C06366E00EA1BED /* Globals.swift */; };
+		552C916B1C06378A00EA1BED /* GraphicID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552C916A1C06378A00EA1BED /* GraphicID.swift */; };
 		8D0C4E8D0486CD37000505A6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0867D6AAFE840B52C02AAC07 /* InfoPlist.strings */; };
 		8D0C4E920486CD37000505A6 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20286C33FDCF999611CA2CEA /* Carbon.framework */; };
 		9D2E6DC7152FF00700E5C046 /* Undo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E6DC6152FF00700E5C046 /* Undo.cpp */; };
@@ -87,7 +97,7 @@
 
 /* Begin PBXFileReference section */
 		0867D6ABFE840B52C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		20286C33FDCF999611CA2CEA /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
+		20286C33FDCF999611CA2CEA /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		32DBCF6D0370B57F00C91783 /* 3D BoA Editor_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "3D BoA Editor_Prefix.pch"; sourceTree = "<group>"; };
 		5048396D09E3307300765E4B /* 3D BoA EditorProj.xcconfig */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xcconfig; path = "3D BoA EditorProj.xcconfig"; sourceTree = "<group>"; };
 		5048396E09E3307300765E4B /* 3D BoA EditorTarget.xcconfig */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xcconfig; path = "3D BoA EditorTarget.xcconfig"; sourceTree = "<group>"; };
@@ -98,13 +108,23 @@
 		552C914D1C061C8500EA1BED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		552C914F1C061C8500EA1BED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		552C91541C06230800EA1BED /* Rect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rect.swift; sourceTree = "<group>"; };
+		552C91561C06295800EA1BED /* Swift BOA Editor-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Swift BOA Editor-Bridging-Header.h"; sourceTree = "<group>"; };
+		552C91571C06295800EA1BED /* ResourceBridging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceBridging.h; sourceTree = "<group>"; };
+		552C91581C06295800EA1BED /* ResourceBridging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceBridging.m; sourceTree = "<group>"; };
+		552C915B1C06326200EA1BED /* Dungeon Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dungeon Bold.ttf"; sourceTree = "<group>"; };
+		552C915E1C06327C00EA1BED /* Boink down.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = "Boink down.aiff"; sourceTree = "<group>"; };
+		552C915F1C06327C00EA1BED /* Boink Up.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = "Boink Up.aiff"; sourceTree = "<group>"; };
+		552C91601C06327C00EA1BED /* button short.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = "button short.aiff"; sourceTree = "<group>"; };
+		552C91611C06327C00EA1BED /* ca-click.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = "ca-click.aiff"; sourceTree = "<group>"; };
+		552C91621C06327C00EA1BED /* poison cough.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = "poison cough.aiff"; sourceTree = "<group>"; };
+		552C91681C06366E00EA1BED /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
+		552C916A1C06378A00EA1BED /* GraphicID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphicID.swift; sourceTree = "<group>"; };
 		8D0C4E960486CD37000505A6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D2E6DC3152FEFF600E5C046 /* Undo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Undo.h; sourceTree = "<group>"; };
 		9D2E6DC6152FF00700E5C046 /* Undo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Undo.cpp; sourceTree = "<group>"; };
 		9D3AB05C137E257000B4F413 /* mode_buttons.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mode_buttons.png; sourceTree = "<group>"; };
 		9D8A95FF141D4D9300B69D51 /* Blades of Avernum Editor License.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Blades of Avernum Editor License.pdf"; sourceTree = "<group>"; };
-		9DF52BC412CFC6DA00D01803 /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = /System/Library/Frameworks/QuickTime.framework; sourceTree = "<absolute>"; };
-		9DF52BC512CFC6DA00D01803 /* libstdc++-static.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libstdc++-static.a"; path = "/usr/lib/libstdc++-static.a"; sourceTree = "<absolute>"; };
+		9DF52BC412CFC6DA00D01803 /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = System/Library/Frameworks/QuickTime.framework; sourceTree = SDKROOT; };
 		9DF52BC912CFC71800D01803 /* global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = global.h; sourceTree = "<group>"; };
 		9DF52BCA12CFC71800D01803 /* tokntype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tokntype.h; sourceTree = "<group>"; };
 		9DF52BD612CFC74D00D01803 /* Bl A Editor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "Bl A Editor.cpp"; sourceTree = "<group>"; };
@@ -164,6 +184,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				552C915A1C062A0800EA1BED /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,7 +255,6 @@
 			children = (
 				9DF52CA312CFD5C500D01803 /* Sparkle.framework */,
 				9DF52BC412CFC6DA00D01803 /* QuickTime.framework */,
-				9DF52BC512CFC6DA00D01803 /* libstdc++-static.a */,
 				20286C33FDCF999611CA2CEA /* Carbon.framework */,
 			);
 			name = Frameworks;
@@ -252,13 +272,32 @@
 		552C91471C061C8500EA1BED /* Swift BOA Editor */ = {
 			isa = PBXGroup;
 			children = (
+				552C91561C06295800EA1BED /* Swift BOA Editor-Bridging-Header.h */,
 				552C91481C061C8500EA1BED /* AppDelegate.swift */,
+				552C91681C06366E00EA1BED /* Globals.swift */,
+				552C916A1C06378A00EA1BED /* GraphicID.swift */,
 				552C91541C06230800EA1BED /* Rect.swift */,
 				552C914A1C061C8500EA1BED /* Assets.xcassets */,
 				552C914C1C061C8500EA1BED /* MainMenu.xib */,
+				552C915B1C06326200EA1BED /* Dungeon Bold.ttf */,
+				552C915D1C06327C00EA1BED /* UI Sounds */,
 				552C914F1C061C8500EA1BED /* Info.plist */,
+				552C91571C06295800EA1BED /* ResourceBridging.h */,
+				552C91581C06295800EA1BED /* ResourceBridging.m */,
 			);
 			path = "Swift BOA Editor";
+			sourceTree = "<group>";
+		};
+		552C915D1C06327C00EA1BED /* UI Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				552C915E1C06327C00EA1BED /* Boink down.aiff */,
+				552C915F1C06327C00EA1BED /* Boink Up.aiff */,
+				552C91601C06327C00EA1BED /* button short.aiff */,
+				552C91611C06327C00EA1BED /* ca-click.aiff */,
+				552C91621C06327C00EA1BED /* poison cough.aiff */,
+			);
+			path = "UI Sounds";
 			sourceTree = "<group>";
 		};
 		9DF52BD512CFC73700D01803 /* Sources */ = {
@@ -403,7 +442,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				552C91661C06327C00EA1BED /* ca-click.aiff in Resources */,
 				552C914B1C061C8500EA1BED /* Assets.xcassets in Resources */,
+				552C91631C06327C00EA1BED /* Boink down.aiff in Resources */,
+				552C915C1C06326200EA1BED /* Dungeon Bold.ttf in Resources */,
+				552C91671C06327C00EA1BED /* poison cough.aiff in Resources */,
+				552C91641C06327C00EA1BED /* Boink Up.aiff in Resources */,
+				552C91651C06327C00EA1BED /* button short.aiff in Resources */,
 				552C91531C061F2C00EA1BED /* Blades of Avernum Editor License.pdf in Resources */,
 				552C914E1C061C8500EA1BED /* MainMenu.xib in Resources */,
 			);
@@ -490,8 +535,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				552C916B1C06378A00EA1BED /* GraphicID.swift in Sources */,
+				552C91691C06366E00EA1BED /* Globals.swift in Sources */,
 				552C91491C061C8500EA1BED /* AppDelegate.swift in Sources */,
 				552C91551C06230800EA1BED /* Rect.swift in Sources */,
+				552C91591C06295800EA1BED /* ResourceBridging.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -580,6 +628,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.github.maddthesane.Swift-BOA-Editor";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Swift BOA Editor/Swift BOA Editor-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -623,6 +672,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.github.maddthesane.Swift-BOA-Editor";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Swift BOA Editor/Swift BOA Editor-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -709,6 +759,7 @@
 				552C91521C061C8500EA1BED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C0E91AC508A95435008D54AB /* Build configuration list for PBXNativeTarget "3D BoA Editor" */ = {
 			isa = XCConfigurationList;
