@@ -18,7 +18,9 @@ extern "C" {
 
 bool importBladesOfExileScenario(CFURLRef oldBoE, CFURLRef newBoA, CFErrorRef *error);
 bool setBladesDirectory(CFURLRef boa);
-const char *getStatusString();
+
+CFStringRef copyStatusString();
+void clearStatusString();
 
 
 #ifdef __cplusplus

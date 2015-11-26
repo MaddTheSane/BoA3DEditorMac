@@ -38,8 +38,17 @@ extern bool load_core_scenario_data();
 
 std::string statStr = "";
 
-const char *getStatusString() {
-	return statStr.c_str();
+CFStringRef copyStatusString()
+{
+	const char *bStr = statStr.c_str();
+	CFStringRef aStr = CFStringCreateWithBytes(kCFAllocatorDefault, (UInt8*)bStr, strlen(bStr), kCFStringEncodingMacRoman, false);
+	
+	return aStr;
+}
+
+void clearStatusString()
+{
+	statStr.clear();
 }
 
 static bool copy_script(const char *script_source_name,const char *script_dest_name);

@@ -23,13 +23,17 @@
 	
 	bool imported = importBladesOfExileScenario((CFURLRef)boeURL, (CFURLRef)dest, &theErr);
 	
-	NSString *response = @(getStatusString());
+	NSString *response = (NSString*)copyStatusString();
+	
+	clearStatusString();
+	
 	if (imported) {
 		reply(response, nil);
 	} else {
 		NSError *err = CFBridgingRelease(theErr);
 		reply(response, err);
 	}
+	[response release];
 }
 
 @end
