@@ -3380,6 +3380,9 @@ void horse_record_type::clear_horse_record_type()
 	property = FALSE;
 }
 
+void horse_record_type::port(){
+	flip_short(&which_town);
+}
 
 bool set_char_variable(short which_char_type,short which_value,short new_value)
 {
@@ -3748,4 +3751,90 @@ short evaluate_operator(short operator_type,short op1,short op2)
 			
 		default: return 0;
 	}
+}
+
+// "Town: Corner Wall display in realistic mode" fix
+// correct bugs on corescendata2.txt
+//
+// In corescendata2.txt, the definition of terrain 6 has next bug
+//
+// begindefineterrain 6; // nw wall
+//	te_which_icon = 5;
+//	te_ed_which_icon = 4;
+//	te_cutaway_which_sheet = -1;
+//	te_full_move_block = 0;
+//	te_full_look_block = 0;
+//	te_blocks_view_e = 0;	// <-- this line is needed
+//	te_move_block_n = 1;
+//	te_look_block_n = 1;
+//	te_blocks_view_n = 1;
+//	te_move_block_w = 1;
+//	te_look_block_w = 1;
+//	te_blocks_view_w = 1;
+//
+// This bug affects not only terrain 6, but terrain 7, 42 and 43.
+// And because of this bug, NW corner wall display in realistic mode becomes odd.
+// It's better to fix this bug on corescendata2.txt itself, but it may cause unpredictable errors on the BoA Game.
+// For this reason, correct them here.
+
+static void patch_corescendata2( void )
+{
+	// equivalant of "te_blocks_view_e = 0;"
+	scen_data.scen_terrains[6].blocks_view[3] = 0;
+	scen_data.scen_terrains[7].blocks_view[3] = 0;
+	scen_data.scen_terrains[42].blocks_view[3] = 0;
+	scen_data.scen_terrains[43].blocks_view[3] = 0;
+}
+
+// Loads the core scenario data from the scripts corescendata.txt and corescendata2.txt
+bool load_core_scenario_data()
+{
+	script_type *scenario_script = new script_type;
+	if (scenario_script == NULL) {
+		ASB("Major Error 1: Couldn't initialize core scenario data. Probably, either you ran out of memory or some change has been made to the files corescendata.txt or corescendata2.txt.");
+		ASB("There was an error when loading the basic scenario data script which came with the editor. You won't be able to edit any scenarios until the problems is corrected. You may want to reinstall the game.");
+		return FALSE;
+	}
+	
+	// load first scen data
+	if (scenario_script->load_script(0,"corescendata",0) == FALSE) {
+		ASB("Major Error 2: Couldn't initialize core scenario data. Probably, either you ran out of memory or some change has been made to the files corescendata.txt or corescendata2.txt.");
+		ASB("There was an error when loading the basic scenario data script which came with the editor. You won't be able to edit any scenarios until the problems is corrected. You may want to reinstall the game.");
+		delete scenario_script;
+		return FALSE;
+	}
+	if (scenario_script->process_scenario_data() == FALSE) {
+		ASB("Major Error 3: Couldn't initialize core scenario data. Probably, either you ran out of memory or some change has been made to the files corescendata.txt or corescendata2.txt.");
+		ASB("There was an error when loading the basic scenario data script which came with the editor. You won't be able to edit any scenarios until the problems is corrected. You may want to reinstall the game.");
+		delete scenario_script;
+		return FALSE;
+	}
+	delete scenario_script;
+	scenario_script = NULL;
+	
+	scenario_script = new script_type;
+	if (scenario_script == NULL) {
+		ASB("Major Error 4: Couldn't initialize core scenario data. Probably, either you ran out of memory or some change has been made to the files corescendata.txt or corescendata2.txt.");
+		ASB("There was an error when loading the basic scenario data script which came with the editor. You won't be able to edit any scenarios until the problems is corrected. You may want to reinstall the game.");
+		return FALSE;
+	}
+	
+	// load first scen data
+	if (scenario_script->load_script(0,"corescendata2",0) == FALSE) {
+		ASB("Major Error 5: Couldn't initialize core scenario data. Probably, either you ran out of memory or some change has been made to the files corescendata.txt or corescendata2.txt.");
+		ASB("There was an error when loading the basic scenario data script which came with the editor. You won't be able to edit any scenarios until the problems is corrected. You may want to reinstall the game.");
+		delete scenario_script;
+		return FALSE;
+	}
+	if (scenario_script->process_scenario_data() == FALSE) {
+		ASB("Major Error 6: Couldn't initialize core scenario data. Probably, either you ran out of memory or some change has been made to the files corescendata.txt or corescendata2.txt.");
+		ASB("There was an error when loading the basic scenario data script which came with the editor. You won't be able to edit any scenarios until the problems is corrected. You may want to reinstall the game.");
+		delete scenario_script;
+		return FALSE;
+	}
+	delete scenario_script;
+	
+	patch_corescendata2();		// correct bugs on corescendata2.txt
+	
+	return TRUE;
 }

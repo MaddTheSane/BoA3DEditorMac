@@ -1232,9 +1232,8 @@ void add_big_string_to_file(short file_id,const char *str1,short num1,const char
 void c2p(Str255 str);
 void p2c(Str255 str);
 
-Boolean load_core_scenario_data();
-
-short get_ran (short times,short  min,short  max);
+short get_ran(short times, short min, short max);
+void give_error(const char *text1, const char *text2,short parent_num);
 
 
 static inline void flip_short(short *s)

@@ -11,6 +11,7 @@
 
 #include "ImporterGlobal.h"
 
+bool load_core_scenario_data();
 
 /// a block of text, loaded in from a file.
 class text_block_type

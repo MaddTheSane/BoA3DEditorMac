@@ -13,8 +13,8 @@
 
 #include "ImporterGlobal.h"
 
-Boolean create_new_item(short item_to_create, location create_loc, Boolean property, item_type *i_to_make);
-Boolean create_new_ter_script(const char* ter_script_name,location create_loc,in_town_on_ter_script_type* script_to_make);
+bool create_new_item(short item_to_create, location create_loc, Boolean property, item_type *i_to_make);
+bool create_new_ter_script(const char* ter_script_name,location create_loc,in_town_on_ter_script_type* script_to_make);
 void set_up_lights();
 void set_all_items_containment();
 

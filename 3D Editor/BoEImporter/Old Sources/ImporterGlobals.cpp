@@ -67,6 +67,14 @@ terrain_type_type get_ter(short which_ter)
 
 void give_error(const char *text1, const char *text2,short parent_num)
 {
+	std::string aText1 = std::string(text1);
+	std::string aText2 = std::string(text2);
 	
+	std::string combined = aText1 + ": " + aText2 + "\n";
+	statStr += combined;
 }
 
+void oops_error(short unused)
+{
+	
+}
