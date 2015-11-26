@@ -22,6 +22,13 @@
 		552C91671C06327C00EA1BED /* poison cough.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 552C91621C06327C00EA1BED /* poison cough.aiff */; };
 		552C91691C06366E00EA1BED /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552C91681C06366E00EA1BED /* Globals.swift */; };
 		552C916B1C06378A00EA1BED /* GraphicID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552C916A1C06378A00EA1BED /* GraphicID.swift */; };
+		552C91751C0660DC00EA1BED /* BoEImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 552C91741C0660DC00EA1BED /* BoEImporter.m */; };
+		552C91771C0660DC00EA1BED /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 552C91761C0660DC00EA1BED /* main.m */; };
+		552C917B1C0660DC00EA1BED /* BoEImporter.xpc in Embed XPC Services */ = {isa = PBXBuildFile; fileRef = 552C91701C0660DC00EA1BED /* BoEImporter.xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		552C91901C067DA100EA1BED /* ExileCppImporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 552C91831C067DA100EA1BED /* ExileCppImporter.cpp */; };
+		552C91A11C068C7900EA1BED /* EdFcns.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 552C91A01C068C7900EA1BED /* EdFcns.cpp */; };
+		552C91A51C06978200EA1BED /* ImporterGlobals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 552C91A41C06978200EA1BED /* ImporterGlobals.cpp */; };
+		552C91A71C069E9C00EA1BED /* Graphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 552C91A61C069E9C00EA1BED /* Graphics.cpp */; };
 		8D0C4E8D0486CD37000505A6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0867D6AAFE840B52C02AAC07 /* InfoPlist.strings */; };
 		8D0C4E920486CD37000505A6 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20286C33FDCF999611CA2CEA /* Carbon.framework */; };
 		9D2E6DC7152FF00700E5C046 /* Undo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E6DC6152FF00700E5C046 /* Undo.cpp */; };
@@ -81,7 +88,28 @@
 		9DF52D2212CFE6FD00D01803 /* Bl A Editor.r in Rez */ = {isa = PBXBuildFile; fileRef = 9DF52C1312CFCCA400D01803 /* Bl A Editor.r */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		552C91791C0660DC00EA1BED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20286C28FDCF999611CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 552C916F1C0660DC00EA1BED;
+			remoteInfo = BoEImporter;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
+		552C917F1C0660DC00EA1BED /* Embed XPC Services */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/XPCServices";
+			dstSubfolderSpec = 16;
+			files = (
+				552C917B1C0660DC00EA1BED /* BoEImporter.xpc in Embed XPC Services */,
+			);
+			name = "Embed XPC Services";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9DF52CC212CFD7D500D01803 /* Copy Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -119,6 +147,22 @@
 		552C91621C06327C00EA1BED /* poison cough.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = "poison cough.aiff"; sourceTree = "<group>"; };
 		552C91681C06366E00EA1BED /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		552C916A1C06378A00EA1BED /* GraphicID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphicID.swift; sourceTree = "<group>"; };
+		552C91701C0660DC00EA1BED /* BoEImporter.xpc */ = {isa = PBXFileReference; explicitFileType = "wrapper.xpc-service"; includeInIndex = 0; path = BoEImporter.xpc; sourceTree = BUILT_PRODUCTS_DIR; };
+		552C91721C0660DC00EA1BED /* BoEImporterProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BoEImporterProtocol.h; sourceTree = "<group>"; };
+		552C91731C0660DC00EA1BED /* BoEImporter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BoEImporter.h; sourceTree = "<group>"; };
+		552C91741C0660DC00EA1BED /* BoEImporter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BoEImporter.m; sourceTree = "<group>"; };
+		552C91761C0660DC00EA1BED /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		552C91781C0660DC00EA1BED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		552C91811C067DA100EA1BED /* 3D BoA Editor_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "3D BoA Editor_Prefix.pch"; sourceTree = "<group>"; };
+		552C91831C067DA100EA1BED /* ExileCppImporter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = ExileCppImporter.cpp; sourceTree = "<group>"; };
+		552C91881C067DA100EA1BED /* ImporterGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImporterGlobal.h; sourceTree = "<group>"; };
+		552C918D1C067DA100EA1BED /* tokentype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tokentype.h; sourceTree = "<group>"; };
+		552C919F1C06845C00EA1BED /* ExileCppImporter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExileCppImporter.h; sourceTree = "<group>"; };
+		552C91A01C068C7900EA1BED /* EdFcns.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = EdFcns.cpp; sourceTree = "<group>"; };
+		552C91A21C068E2E00EA1BED /* EdFcns.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EdFcns.h; sourceTree = "<group>"; };
+		552C91A31C068EFB00EA1BED /* Graphics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Graphics.h; sourceTree = "<group>"; };
+		552C91A41C06978200EA1BED /* ImporterGlobals.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImporterGlobals.cpp; sourceTree = "<group>"; };
+		552C91A61C069E9C00EA1BED /* Graphics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Graphics.cpp; sourceTree = "<group>"; };
 		8D0C4E960486CD37000505A6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D2E6DC3152FEFF600E5C046 /* Undo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Undo.h; sourceTree = "<group>"; };
 		9D2E6DC6152FF00700E5C046 /* Undo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Undo.cpp; sourceTree = "<group>"; };
@@ -188,6 +232,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		552C916D1C0660DC00EA1BED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D0C4E910486CD37000505A6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -206,6 +257,7 @@
 			children = (
 				508344B209E5C41E0093A071 /* 3D BoA Editor.app */,
 				552C91461C061C8500EA1BED /* Swift BOA Editor.app */,
+				552C91701C0660DC00EA1BED /* BoEImporter.xpc */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -218,6 +270,7 @@
 				9DF52BD512CFC73700D01803 /* Sources */,
 				20286C2CFDCF999611CA2CEA /* Resources */,
 				552C91471C061C8500EA1BED /* Swift BOA Editor */,
+				552C91711C0660DC00EA1BED /* BoEImporter */,
 				20286C32FDCF999611CA2CEA /* Frameworks */,
 				195DF8CFFE9D517E11CA2CBB /* Products */,
 			);
@@ -300,6 +353,37 @@
 			path = "UI Sounds";
 			sourceTree = "<group>";
 		};
+		552C91711C0660DC00EA1BED /* BoEImporter */ = {
+			isa = PBXGroup;
+			children = (
+				552C91801C067D2800EA1BED /* C++ Sources */,
+				552C91721C0660DC00EA1BED /* BoEImporterProtocol.h */,
+				552C91731C0660DC00EA1BED /* BoEImporter.h */,
+				552C91741C0660DC00EA1BED /* BoEImporter.m */,
+				552C91761C0660DC00EA1BED /* main.m */,
+				552C91781C0660DC00EA1BED /* Info.plist */,
+			);
+			path = BoEImporter;
+			sourceTree = "<group>";
+		};
+		552C91801C067D2800EA1BED /* C++ Sources */ = {
+			isa = PBXGroup;
+			children = (
+				552C91811C067DA100EA1BED /* 3D BoA Editor_Prefix.pch */,
+				552C91881C067DA100EA1BED /* ImporterGlobal.h */,
+				552C919F1C06845C00EA1BED /* ExileCppImporter.h */,
+				552C91831C067DA100EA1BED /* ExileCppImporter.cpp */,
+				552C91A21C068E2E00EA1BED /* EdFcns.h */,
+				552C91A01C068C7900EA1BED /* EdFcns.cpp */,
+				552C91A31C068EFB00EA1BED /* Graphics.h */,
+				552C91A61C069E9C00EA1BED /* Graphics.cpp */,
+				552C918D1C067DA100EA1BED /* tokentype.h */,
+				552C91A41C06978200EA1BED /* ImporterGlobals.cpp */,
+			);
+			name = "C++ Sources";
+			path = "Old Sources";
+			sourceTree = "<group>";
+		};
 		9DF52BD512CFC73700D01803 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -371,15 +455,34 @@
 				552C91421C061C8500EA1BED /* Sources */,
 				552C91431C061C8500EA1BED /* Frameworks */,
 				552C91441C061C8500EA1BED /* Resources */,
+				552C917F1C0660DC00EA1BED /* Embed XPC Services */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				552C917A1C0660DC00EA1BED /* PBXTargetDependency */,
 			);
 			name = "Swift BOA Editor";
 			productName = "Swift BOA Editor";
 			productReference = 552C91461C061C8500EA1BED /* Swift BOA Editor.app */;
 			productType = "com.apple.product-type.application";
+		};
+		552C916F1C0660DC00EA1BED /* BoEImporter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 552C917C1C0660DC00EA1BED /* Build configuration list for PBXNativeTarget "BoEImporter" */;
+			buildPhases = (
+				552C916C1C0660DC00EA1BED /* Sources */,
+				552C916D1C0660DC00EA1BED /* Frameworks */,
+				552C916E1C0660DC00EA1BED /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BoEImporter;
+			productName = BoEImporter;
+			productReference = 552C91701C0660DC00EA1BED /* BoEImporter.xpc */;
+			productType = "com.apple.product-type.xpc-service";
 		};
 		8D0C4E890486CD37000505A6 /* 3D BoA Editor */ = {
 			isa = PBXNativeTarget;
@@ -414,6 +517,9 @@
 					552C91451C061C8500EA1BED = {
 						CreatedOnToolsVersion = 7.1.1;
 					};
+					552C916F1C0660DC00EA1BED = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
 				};
 			};
 			buildConfigurationList = C0E91AC908A95435008D54AB /* Build configuration list for PBXProject "3D BoA Editor" */;
@@ -433,6 +539,7 @@
 			targets = (
 				8D0C4E890486CD37000505A6 /* 3D BoA Editor */,
 				552C91451C061C8500EA1BED /* Swift BOA Editor */,
+				552C916F1C0660DC00EA1BED /* BoEImporter */,
 			);
 		};
 /* End PBXProject section */
@@ -451,6 +558,13 @@
 				552C91651C06327C00EA1BED /* button short.aiff in Resources */,
 				552C91531C061F2C00EA1BED /* Blades of Avernum Editor License.pdf in Resources */,
 				552C914E1C061C8500EA1BED /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		552C916E1C0660DC00EA1BED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -543,6 +657,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		552C916C1C0660DC00EA1BED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				552C91771C0660DC00EA1BED /* main.m in Sources */,
+				552C91751C0660DC00EA1BED /* BoEImporter.m in Sources */,
+				552C91A11C068C7900EA1BED /* EdFcns.cpp in Sources */,
+				552C91A51C06978200EA1BED /* ImporterGlobals.cpp in Sources */,
+				552C91A71C069E9C00EA1BED /* Graphics.cpp in Sources */,
+				552C91901C067DA100EA1BED /* ExileCppImporter.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D0C4E8F0486CD37000505A6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -564,6 +691,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		552C917A1C0660DC00EA1BED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 552C916F1C0660DC00EA1BED /* BoEImporter */;
+			targetProxy = 552C91791C0660DC00EA1BED /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		0867D6AAFE840B52C02AAC07 /* InfoPlist.strings */ = {
@@ -676,6 +811,92 @@
 			};
 			name = Release;
 		};
+		552C917D1C0660DC00EA1BED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++98";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BoEImporter/Old Sources/3D BoA Editor_Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = BoEImporter/Info.plist;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.maddthesane.BoEImporter;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		552C917E1C0660DC00EA1BED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++98";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BoEImporter/Old Sources/3D BoA Editor_Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = BoEImporter/Info.plist;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.maddthesane.BoEImporter;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		C0E91AC608A95435008D54AB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5048396E09E3307300765E4B /* 3D BoA EditorTarget.xcconfig */;
@@ -760,6 +981,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		552C917C1C0660DC00EA1BED /* Build configuration list for PBXNativeTarget "BoEImporter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				552C917D1C0660DC00EA1BED /* Debug */,
+				552C917E1C0660DC00EA1BED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		C0E91AC508A95435008D54AB /* Build configuration list for PBXNativeTarget "3D BoA Editor" */ = {
 			isa = XCConfigurationList;
