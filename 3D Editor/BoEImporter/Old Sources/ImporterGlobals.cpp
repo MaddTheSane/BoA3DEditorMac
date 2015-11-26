@@ -64,3 +64,9 @@ terrain_type_type get_ter(short which_ter)
 	ter = scen_data.scen_terrains[which_ter];
 	return ter;
 }
+
+void give_error(const char *text1, const char *text2,short parent_num)
+{
+	
+}
+

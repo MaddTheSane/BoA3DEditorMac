@@ -31,7 +31,15 @@
 #include "ExileCppImporter.h"
 #include "EdFcns.h"
 #include "Graphics.h"
+#include <string>
 
+std::string statStr = "";
+
+const char *getStatusString() {
+	return statStr.c_str();
+}
+
+static bool copy_script(const char *script_source_name,const char *script_dest_name);
 
 static void boe_port_scenario();
 static void boe_port_item_list();
@@ -96,6 +104,9 @@ extern short max_zone_dim[3];
 extern Boolean file_is_loaded;
 extern Boolean showed_graphics_error;
 
+SelectionType::SelectionType_e selected_object_type = SelectionType::None;
+unsigned short selected_object_number;
+
 extern short cen_x, cen_y;
 extern Boolean change_made_town,change_made_outdoors;
 
@@ -104,8 +115,8 @@ unsigned char border_floor[4][50];
 unsigned char border_height[4][50];
 outdoor_record_type border_terrains[3][3];
 
-short start_volume;
-long start_dir;
+FSVolumeRefNum start_volume;
+SInt32 start_dir;
 FSSpec current_scenario_file_info;
 //Str63 last_load_file = "\pBlades of Avernum Scenario";
 
@@ -1908,19 +1919,6 @@ void load_all_town_names(FSSpec* to_open)
 	if (error != 0) {FSClose(file_id);oops_error(86);return;}
 }
 
-void oops_error(short error)
-{
-	Str255 error_str;
-	
-	beep();
-
-	sprintf((char *) error_str,"Giving the scenario editor more memory might also help. Be sure to back your scenario up often. Error number: %d.",error);
-	give_error("The program encountered an error while loading/saving/creating the scenario. To prevent future problems, the program will now terminate. Trying again may solve the problem.",
-			   (char *) error_str,0);
-	file_is_loaded = FALSE;
-	redraw_screen();
-}
-
 
 void start_data_dump()
 {
@@ -2015,6 +2013,7 @@ short str_to_num(Str255 str)
 	StringToNum(str,&l);
 	return (short) l;
 }
+#endif
 
 Boolean create_basic_scenario(char *scen_name_short,char *scen_name_with_ext,char *scen_full_name,short out_width,short out_height,short on_surface,Boolean use_warriors_grove)
 {
@@ -2164,6 +2163,7 @@ Boolean create_basic_scenario(char *scen_name_short,char *scen_name_with_ext,cha
 	return TRUE;
 }
 
+#if 0
 // Fix "Import Town bug"
 // scenario.town_size[which_town] was used instead of temp_scenario.town_size[which_town] when the target town is loaded.
 
@@ -2349,194 +2349,6 @@ Boolean import_boa_outdoors()
 old_blades_scenario_data_type blades_scen;
 old_blades_scen_item_data_type blades_scen_data;
 old_blades_piles_of_stuff_dumping_type blades_data_dump;
- 
-void extract_old_scen_text()
-{
-	short i,j,file_id;
-	//StandardFileReply s_reply;
-	OSErr error;
-	long len;
-	FSSpec dump_file;
-	
-	//StandardGetFile(NULL,-1,NULL,&s_reply);
-			
-	//if (s_reply.sfGood == FALSE)
-	//	return;
-					
-	//old_scen_file_to_load = s_reply.sfFile;
-
-	if ( open_scenario_save_file( &file_id, NULL, NULL, 400, 2 ) == FALSE )
-		return;
-	
-	len = (long) sizeof(old_blades_scenario_data_type);
-	if ((error = FSRead(file_id, &len, (char *) &blades_scen)) != 0){
-		FSClose(file_id); oops_error(401); return;
-		}
-	len = (long) sizeof(old_blades_scen_item_data_type);
-	if ((error = FSRead(file_id, &len, (char *) &blades_scen_data)) != 0){
-		FSClose(file_id); oops_error(402); return;
-		}
-	for (i = 0; i < 270; i++) {
-		len = (long) (blades_scen.scen_str_len[i]);
-		if ((error = FSRead(file_id, &len, (char *) &(blades_data_dump.scen_strs[i]))) != 0) {
-			FSClose(file_id); oops_error(403); return;
-			}
-		blades_data_dump.scen_strs[i][len] = 0;
-		}
-
-	FSClose(file_id);
-	
-	// now dump to text file
-	FSMakeFSSpec(start_volume,start_dir,"\pBlades Scenario Dump",&dump_file);
-	FSpDelete(&dump_file);
-	error = FSpCreate(&dump_file,'ttxt','TEXT',smSystemScript);
-	short data_dump_file_id;
-	if ((error = FSpOpenDF(&dump_file,3,&data_dump_file_id)) != 0) {
-		SysBeep(50);
-		return;
-		}			
-
-	SetFPos (data_dump_file_id, 2, 0);
-
-	char get_text[256];
-	short species_trans[15] = {0,5,6,12,0, 0,1,7,8,4, 10,11,9,5,6};
-
-	for (i = 0; i < 256; i++) {
-		sprintf((char *)get_text,"begindefinecreature %d;\r",i);
-		len = (long) (strlen((char *)get_text));
-		FSWrite(data_dump_file_id, &len, (char *) get_text);
-//		sprintf((char *)get_text,"\tclear;\r",i);
-		sprintf((char *)get_text,"\tclear;\r");
-		len = (long) (strlen((char *)get_text));
-		FSWrite(data_dump_file_id, &len, (char *) get_text);
-
-		sprintf((char *)get_text,"\tcr_name = \"%s\";\r",blades_scen_data.monst_names[i]);
-		for (j = 0; j < 256; j++)
-			if (get_text[j] == '\"')
-				get_text[j] = 34;
-		len = (long) (strlen((char *)get_text));
-		FSWrite(data_dump_file_id, &len, (char *) get_text);	
-
-		sprintf((char *)get_text,"\tcr_level = %d;\r",blades_scen.scen_monsters[i].level * 2);
-		len = (long) (strlen((char *)get_text));
-		FSWrite(data_dump_file_id, &len, (char *) get_text);	
-		
-		if (blades_scen.scen_monsters[i].a[0] > 0) {
-			sprintf((char *)get_text,"\tcr_attack_1 = 6;\r");
-			len = (long) (strlen((char *)get_text));
-			FSWrite(data_dump_file_id, &len, (char *) get_text);	
-			}
-		if (blades_scen.scen_monsters[i].a[1] > 0) {
-			sprintf((char *)get_text,"\tcr_attack_2 = 6;\r");
-			len = (long) (strlen((char *)get_text));
-			FSWrite(data_dump_file_id, &len, (char *) get_text);	
-			}
-		if (blades_scen.scen_monsters[i].a[2] > 0) {
-			sprintf((char *)get_text,"\tcr_attack_3 = 6;\r");
-			len = (long) (strlen((char *)get_text));
-			FSWrite(data_dump_file_id, &len, (char *) get_text);	
-			}
-		if (blades_scen.scen_monsters[i].a1_type > 0) {
-			sprintf((char *)get_text,"\tcr_attack_1_type = %d;\r",blades_scen.scen_monsters[i].a1_type);
-			len = (long) (strlen((char *)get_text));
-			FSWrite(data_dump_file_id, &len, (char *) get_text);	
-			}
-		if (blades_scen.scen_monsters[i].a23_type > 0) {
-			sprintf((char *)get_text,"\tcr_attack_23_type = %d;\r",blades_scen.scen_monsters[i].a23_type);
-			len = (long) (strlen((char *)get_text));
-			FSWrite(data_dump_file_id, &len, (char *) get_text);	
-			}
-
-		sprintf((char *)get_text,"\tcr_species = %d;\r",species_trans[blades_scen.scen_monsters[i].m_type]);
-		len = (long) (strlen((char *)get_text));
-		FSWrite(data_dump_file_id, &len, (char *) get_text);
-		
-		switch (blades_scen.scen_monsters[i].default_attitude) {
-			case 0: case 1: sprintf((char *)get_text,"\tcr_default_attitude = 2; \r"); break;
-			case 2: sprintf((char *)get_text,"\tcr_default_attitude = 4; \r"); break;
-			case 3: sprintf((char *)get_text,"\tcr_default_attitude = 5; \r"); break;
-			len = (long) (strlen((char *)get_text));
-			FSWrite(data_dump_file_id, &len, (char *) get_text);
-			}
-			
-		if (blades_scen.scen_monsters[i].immunities & 8) {
-			sprintf((char *)get_text,"\tcr_immunities 0 = 100;\r");
-			len = (long) (strlen((char *)get_text));
-			FSWrite(data_dump_file_id, &len, (char *) get_text);
-			}
-			else if (blades_scen.scen_monsters[i].immunities & 4) {
-				sprintf((char *)get_text,"\tcr_immunities 0 = 50;\r");
-				len = (long) (strlen((char *)get_text));
-				FSWrite(data_dump_file_id, &len, (char *) get_text);
-				}
-		if (blades_scen.scen_monsters[i].immunities & 32) {
-			sprintf((char *)get_text,"\tcr_immunities 1 = 100;\r");
-			len = (long) (strlen((char *)get_text));
-			FSWrite(data_dump_file_id, &len, (char *) get_text);
-			}
-			else if (blades_scen.scen_monsters[i].immunities & 16) {
-				sprintf((char *)get_text,"\tcr_immunities 1 = 50;\r");
-				len = (long) (strlen((char *)get_text));
-				FSWrite(data_dump_file_id, &len, (char *) get_text);
-				}
-		if (blades_scen.scen_monsters[i].immunities & 2) {
-			sprintf((char *)get_text,"\tcr_immunities 2 = 100;\r");
-			len = (long) (strlen((char *)get_text));
-			FSWrite(data_dump_file_id, &len, (char *) get_text);
-			}
-			else if (blades_scen.scen_monsters[i].immunities & 1) {
-				sprintf((char *)get_text,"\tcr_immunities 2 = 50;\r");
-				len = (long) (strlen((char *)get_text));
-				FSWrite(data_dump_file_id, &len, (char *) get_text);
-				}
-		if (blades_scen.scen_monsters[i].immunities & 128) {
-			sprintf((char *)get_text,"\tcr_immunities 4 = 100;\r");
-			len = (long) (strlen((char *)get_text));
-			FSWrite(data_dump_file_id, &len, (char *) get_text);
-			}
-			else if (blades_scen.scen_monsters[i].immunities & 64) {
-				sprintf((char *)get_text,"\tcr_immunities 4 = 50;\r");
-				len = (long) (strlen((char *)get_text));
-				FSWrite(data_dump_file_id, &len, (char *) get_text);
-				}
-		sprintf((char *)get_text,"\r");
-		len = (long) (strlen((char *)get_text));
-		FSWrite(data_dump_file_id, &len, (char *) get_text);
-		}
-
-	sprintf((char *)get_text,"\r");
-	len = (long) (strlen((char *)get_text));
-	FSWrite(data_dump_file_id, &len, (char *) get_text);
-
-
-/*	for (i = 0; i < 400; i++) {
-		sprintf((char *)get_text,"begindefineitem %d;\r",i);
-		len = (long) (strlen((char *)get_text));
-		FSWrite(data_dump_file_id, &len, (char *) get_text);
-		sprintf((char *)get_text,"\tclear;\r",i);
-		len = (long) (strlen((char *)get_text));
-		FSWrite(data_dump_file_id, &len, (char *) get_text);
-
-		sprintf((char *)get_text,"  it_name = \"%s\"\r",i,blades_scen_data.scen_items[i].name);
-		for (j = 0; j < 256; j++)
-			if (get_text[j] == '\"')
-				get_text[j] = 34;
-		len = (long) (strlen((char *)get_text));
-		FSWrite(data_dump_file_id, &len, (char *) get_text);
-		sprintf((char *)get_text,"  it_full_name = \"%s\"\r",i,blades_scen_data.scen_items[i].full_name);
-		for (j = 0; j < 256; j++)
-			if (get_text[j] == '\"')
-				get_text[j] = 34;
-		len = (long) (strlen((char *)get_text));
-		FSWrite(data_dump_file_id, &len, (char *) get_text);
-	
-		sprintf((char *)get_text,"\r");
-		len = (long) (strlen((char *)get_text));
-		FSWrite(data_dump_file_id, &len, (char *) get_text);
-		}	*/
-
-	FSClose(data_dump_file_id);	
-}
 
 void EdSysBeep(short duration)
 {
@@ -2547,7 +2359,7 @@ void EdSysBeep(short duration)
 
 // given a script name, copies that script from the directory the editor is in to 
 // the directory of the current, active scenario
-Boolean copy_script(const char *script_source_name,const char *script_dest_name)
+bool copy_script(const char *script_source_name,const char *script_dest_name)
 {
 
 	Str255 file_name,dest_file_name;

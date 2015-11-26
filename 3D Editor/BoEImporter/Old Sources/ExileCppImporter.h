@@ -16,7 +16,7 @@ extern "C" {
 #endif
 
 bool importBladesOfExileScenario(CFURLRef oldBoE, CFURLRef newBoA, CFErrorRef *error);
-
+const char *getStatusString();
 
 
 #ifdef __cplusplus

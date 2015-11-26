@@ -3,3 +3,4 @@
 //
 
 #import "ResourceBridging.h"
+#import "BoEImporterProtocol.h"

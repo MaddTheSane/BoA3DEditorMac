@@ -29,6 +29,7 @@
 		552C91A11C068C7900EA1BED /* EdFcns.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 552C91A01C068C7900EA1BED /* EdFcns.cpp */; };
 		552C91A51C06978200EA1BED /* ImporterGlobals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 552C91A41C06978200EA1BED /* ImporterGlobals.cpp */; };
 		552C91A71C069E9C00EA1BED /* Graphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 552C91A61C069E9C00EA1BED /* Graphics.cpp */; };
+		552C91AA1C06A91100EA1BED /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 552C91A81C06A91100EA1BED /* Parser.cpp */; };
 		8D0C4E8D0486CD37000505A6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0867D6AAFE840B52C02AAC07 /* InfoPlist.strings */; };
 		8D0C4E920486CD37000505A6 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20286C33FDCF999611CA2CEA /* Carbon.framework */; };
 		9D2E6DC7152FF00700E5C046 /* Undo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E6DC6152FF00700E5C046 /* Undo.cpp */; };
@@ -156,13 +157,15 @@
 		552C91811C067DA100EA1BED /* 3D BoA Editor_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "3D BoA Editor_Prefix.pch"; sourceTree = "<group>"; };
 		552C91831C067DA100EA1BED /* ExileCppImporter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = ExileCppImporter.cpp; sourceTree = "<group>"; };
 		552C91881C067DA100EA1BED /* ImporterGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImporterGlobal.h; sourceTree = "<group>"; };
-		552C918D1C067DA100EA1BED /* tokentype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tokentype.h; sourceTree = "<group>"; };
+		552C918D1C067DA100EA1BED /* TokenTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TokenTypes.h; sourceTree = "<group>"; };
 		552C919F1C06845C00EA1BED /* ExileCppImporter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExileCppImporter.h; sourceTree = "<group>"; };
 		552C91A01C068C7900EA1BED /* EdFcns.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = EdFcns.cpp; sourceTree = "<group>"; };
 		552C91A21C068E2E00EA1BED /* EdFcns.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EdFcns.h; sourceTree = "<group>"; };
 		552C91A31C068EFB00EA1BED /* Graphics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Graphics.h; sourceTree = "<group>"; };
 		552C91A41C06978200EA1BED /* ImporterGlobals.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImporterGlobals.cpp; sourceTree = "<group>"; };
 		552C91A61C069E9C00EA1BED /* Graphics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Graphics.cpp; sourceTree = "<group>"; };
+		552C91A81C06A91100EA1BED /* Parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Parser.cpp; sourceTree = "<group>"; };
+		552C91A91C06A91100EA1BED /* Parser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Parser.hpp; sourceTree = "<group>"; };
 		8D0C4E960486CD37000505A6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D2E6DC3152FEFF600E5C046 /* Undo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Undo.h; sourceTree = "<group>"; };
 		9D2E6DC6152FF00700E5C046 /* Undo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Undo.cpp; sourceTree = "<group>"; };
@@ -377,8 +380,10 @@
 				552C91A01C068C7900EA1BED /* EdFcns.cpp */,
 				552C91A31C068EFB00EA1BED /* Graphics.h */,
 				552C91A61C069E9C00EA1BED /* Graphics.cpp */,
-				552C918D1C067DA100EA1BED /* tokentype.h */,
+				552C918D1C067DA100EA1BED /* TokenTypes.h */,
 				552C91A41C06978200EA1BED /* ImporterGlobals.cpp */,
+				552C91A91C06A91100EA1BED /* Parser.hpp */,
+				552C91A81C06A91100EA1BED /* Parser.cpp */,
 			);
 			name = "C++ Sources";
 			path = "Old Sources";
@@ -663,6 +668,7 @@
 			files = (
 				552C91771C0660DC00EA1BED /* main.m in Sources */,
 				552C91751C0660DC00EA1BED /* BoEImporter.m in Sources */,
+				552C91AA1C06A91100EA1BED /* Parser.cpp in Sources */,
 				552C91A11C068C7900EA1BED /* EdFcns.cpp in Sources */,
 				552C91A51C06978200EA1BED /* ImporterGlobals.cpp in Sources */,
 				552C91A71C069E9C00EA1BED /* Graphics.cpp in Sources */,

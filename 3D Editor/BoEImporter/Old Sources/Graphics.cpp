@@ -22,6 +22,37 @@ Boolean is_field_type(short i,short j,short field_type)
 	return FALSE;
 }
 
+//places the given field type at the given coordinates
+void make_field_type(short i,short j,short field_type){
+	short k;
+	
+	if (is_field_type(i,j,field_type) == TRUE)
+		return;
+	for (k = 0; k < NUM_TOWN_PLACED_FIELDS; k++){
+		if (town.preset_fields[k].field_type == -1) {
+			town.preset_fields[k].field_loc.x = i;
+			town.preset_fields[k].field_loc.y = j;
+			town.preset_fields[k].field_type = field_type;
+			return;
+		}
+	}
+	//sprintf(str,"Field error  %d %d %d",i,j,field_type);
+	//give_error(str,"",0);
+	//give_error("Each town can have at most 60 fields and special effects (webs, barrels, blood stains, etc.). To place more, use the eraser first.","",0);
+}
+
+//removes the given field type at the given coordinates if it is there
+void take_field_type(short i,short j,short field_type){
+	short k;
+	for (k = 0; k < NUM_TOWN_PLACED_FIELDS; k++){
+		if ((town.preset_fields[k].field_type == field_type) &&
+			(town.preset_fields[k].field_loc.x == i) &&
+			(town.preset_fields[k].field_loc.y == j)) {
+			town.preset_fields[k].clear_preset_field_type();
+			return;
+		}
+	}
+}
 
 Boolean is_oblique_mirror(short i,short j){
 	return is_field_type(i,j,2);

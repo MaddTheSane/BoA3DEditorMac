@@ -338,6 +338,9 @@ bool look_block(location l, short direction);
 bool move_block(location l, short direction);
 bool no_block(location l, short direction,short check_light,short check_travel);
 
+
+static void shift_item_locs(location spot_hit);
+
 #pragma mark -
 
 Boolean hintbook_mode = FALSE;
@@ -1063,13 +1066,14 @@ Boolean is_water(short i,short j)
 	
 	return answer;		
 }
+#endif
 
-//\return true if the indicated space is a container, taking into account barrels and crates
-bool is_container(short x, short y){
+/// return true if the indicated space is a container, taking into account barrels and crates
+static bool is_container(short x, short y){
 	return((scen_data.scen_terrains[t_d.terrain[x][y]].special==40) || is_crate(x,y) || is_barrel(x,y));
 }
 
-
+#if 0
 // prob is 0 - 20, 0 no, 20 always
 void shy_change_circle_terrain(location center,short radius,short terrain_type,short probability)
 {
@@ -3330,6 +3334,7 @@ void create_new_creature(short c_to_create,location create_loc,creature_start_ty
 		}	
 	}
 }
+#endif
 
 // if i_to_make is not null, copies all of the info from this structure
 // returns TRUE is tried to place in an impossible spot, or item was placed
@@ -3343,7 +3348,7 @@ Boolean create_new_item(short item_to_create,location create_loc,Boolean propert
 	if (item_to_create < 0)	
 		return TRUE;
 	if (loc_in_active_area(create_loc) == FALSE) {
-		give_error("You can't place an item here. This space is outside of the active town area.","",0);
+		//give_error("You can't place an item here. This space is outside of the active town area.","",0);
 		return TRUE;
 	}
 	
@@ -3368,15 +3373,14 @@ Boolean create_new_item(short item_to_create,location create_loc,Boolean propert
 			if(is_container(create_loc.x, create_loc.y))
 			   town.preset_items[i].properties |= item_type::contained_bit;
 			shift_item_locs(create_loc);
-			pushUndoStep(new Undo::CreateItem(i,town.preset_items[i],true));
 			
 			return TRUE;
 		}
 	}
 	return FALSE;
 }
-#endif
 
+#if 0
 Boolean create_new_ter_script(const char *ter_script_name,location create_loc,in_town_on_ter_script_type *script_to_make)
 {
 	short i;
@@ -3417,8 +3421,8 @@ Boolean create_new_ter_script(const char *ter_script_name,location create_loc,in
 	//give_error("You can only have 100 active terrain scripts in a zone. No terrain script has been created.","",0);
 	return FALSE;
 }
+#endif
 
-#if 0
 void shift_item_locs(location spot_hit)
 {
 	short i;
@@ -3440,6 +3444,7 @@ void shift_item_locs(location spot_hit)
 	}
 }
 
+#if 0
 void place_items_in_town()
 {
 	location l;

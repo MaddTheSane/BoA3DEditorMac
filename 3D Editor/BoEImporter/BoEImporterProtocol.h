@@ -8,11 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+#define kBoEImporterErrorDomain @"com.github.maddthesane.swiftboaeditor.boeimporter.error"
+
+//typedef NS_ENUM(NSInteger, BoEErrors) {
+//
+//};
+
 // The protocol that this service will vend as its API. This header file will also need to be visible to the process hosting the service.
 @protocol BoEImporterProtocol
 
 // Replace the API of this protocol with an API appropriate to the service you are vending.
-- (void)importBladesOfExileScenarioAtURL:(nonnull NSURL *)boeURL toDestinationURL:(nonnull NSURL*)dest withReply:(void (^__nonnull)(NSError *__nullable))reply;
+- (void)importBladesOfExileScenarioAtURL:(nonnull NSURL *)boeURL toDestinationURL:(nonnull NSURL*)dest avernumDataURL:(nonnull NSURL*)averURL withReply:(void (^__nonnull)(NSString *__nonnull statusString,NSError *__nullable error))reply;
     
 @end
 
