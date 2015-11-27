@@ -83,7 +83,7 @@
 /* Begin PBXFileReference section */
 		0867D6ABFE840B52C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		20286C33FDCF999611CA2CEA /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
-		32DBCF6D0370B57F00C91783 /* 3D BoA Editor_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "3D BoA Editor_Prefix.pch"; sourceTree = "<group>"; };
+		32DBCF6D0370B57F00C91783 /* 3D BoA Editor_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "3D BoA Editor_Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		5048396D09E3307300765E4B /* 3D BoA EditorProj.xcconfig */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xcconfig; path = "3D BoA EditorProj.xcconfig"; sourceTree = "<group>"; };
 		5048396E09E3307300765E4B /* 3D BoA EditorTarget.xcconfig */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xcconfig; path = "3D BoA EditorTarget.xcconfig"; sourceTree = "<group>"; };
 		508344B209E5C41E0093A071 /* 3D BoA Editor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "3D BoA Editor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,6 +192,7 @@
 				9D2E6DC3152FEFF600E5C046 /* Undo.h */,
 			);
 			name = Headers;
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		20286C2CFDCF999611CA2CEA /* Resources */ = {
@@ -206,7 +207,7 @@
 				8D0C4E960486CD37000505A6 /* Info.plist */,
 				0867D6AAFE840B52C02AAC07 /* InfoPlist.strings */,
 			);
-			name = Resources;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		20286C32FDCF999611CA2CEA /* External Frameworks and Libraries */ = {
@@ -246,7 +247,7 @@
 				9DF52BE112CFC74D00D01803 /* townout.cpp */,
 				9D2E6DC6152FF00700E5C046 /* Undo.cpp */,
 			);
-			name = Sources;
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		9DF52BF012CFCCA300D01803 /* image_resources */ = {
@@ -472,6 +473,7 @@
 					"_GLIBCXX_DEBUG=1",
 					"_GLIBCXX_DEBUG_PEDANTIC=1",
 				);
+				INFOPLIST_FILE = Resources/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.spidweb.BoA3DEditor;
 				VALID_ARCHS = i386;
 			};
@@ -493,6 +495,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				GCC_PREFIX_HEADER = "3D BoA Editor_Prefix.pch";
+				INFOPLIST_FILE = Resources/Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRESERVE_DEAD_CODE_INITS_AND_TERMS = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.spidweb.BoA3DEditor;
