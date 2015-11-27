@@ -23,3 +23,7 @@ enum SelectionType {
 	case TownEntrance
 }
 
+struct Location {
+	var x: Int8 = 0
+	var y: Int8 = 0
+}

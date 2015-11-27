@@ -17,7 +17,7 @@
 	CFErrorRef theErr = NULL;
 	OSStatus iErr = setBladesDirectory((CFURLRef)averURL);
 	if (iErr != noErr) {
-		reply(@"Unable to change director", [NSError errorWithDomain:NSOSStatusErrorDomain code:iErr userInfo:nil]);
+		reply(@"Unable to change directory", [NSError errorWithDomain:NSOSStatusErrorDomain code:iErr userInfo:nil]);
 		return;
 	}
 	
@@ -30,10 +30,13 @@
 	if (imported) {
 		reply(response, nil);
 	} else {
-		NSError *err = CFBridgingRelease(theErr);
-		reply(response, err);
+		NSAssert(theErr != NULL, @"Error should have been populated.");
+		reply(response, (NSError*)theErr);
 	}
 	[response release];
+	if (theErr) {
+		CFRelease(theErr);
+	}
 }
 
 @end

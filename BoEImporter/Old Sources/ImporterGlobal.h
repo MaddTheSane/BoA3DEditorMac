@@ -1223,11 +1223,11 @@ extern scen_item_data_type scen_data;
 
 void trunc_str(char *str);
 void clean_str(char *str);
-void add_string_to_file(short file_id,const char *str);
-void add_string(short file_id,const char *str);
-void add_cr(short file_id);
-void add_short_string_to_file(short file_id,const char *str1,short num,const char *str2);
-void add_big_string_to_file(short file_id,const char *str1,short num1,const char *str2,short num2,const char *str3,short num3,const char *str4);
+void add_string_to_file(FSIORefNum file_id,const char *str);
+void add_string(FSIORefNum file_id,const char *str);
+void add_cr(FSIORefNum file_id);
+void add_short_string_to_file(FSIORefNum file_id,const char *str1,short num,const char *str2);
+void add_big_string_to_file(FSIORefNum file_id,const char *str1,short num1,const char *str2,short num2,const char *str3,short num3,const char *str4);
 
 void c2p(Str255 str);
 void p2c(Str255 str);

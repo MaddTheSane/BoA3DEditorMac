@@ -30,6 +30,7 @@
 		552C91A51C06978200EA1BED /* ImporterGlobals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 552C91A41C06978200EA1BED /* ImporterGlobals.cpp */; };
 		552C91A71C069E9C00EA1BED /* Graphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 552C91A61C069E9C00EA1BED /* Graphics.cpp */; };
 		552C91AA1C06A91100EA1BED /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 552C91A81C06A91100EA1BED /* Parser.cpp */; };
+		5576DAA61C07C524008D062B /* RecordTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5576DAA51C07C524008D062B /* RecordTypes.swift */; };
 		8D0C4E8D0486CD37000505A6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0867D6AAFE840B52C02AAC07 /* InfoPlist.strings */; };
 		8D0C4E920486CD37000505A6 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20286C33FDCF999611CA2CEA /* Carbon.framework */; };
 		9D2E6DC7152FF00700E5C046 /* Undo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E6DC6152FF00700E5C046 /* Undo.cpp */; };
@@ -166,6 +167,7 @@
 		552C91A61C069E9C00EA1BED /* Graphics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Graphics.cpp; sourceTree = "<group>"; };
 		552C91A81C06A91100EA1BED /* Parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Parser.cpp; sourceTree = "<group>"; };
 		552C91A91C06A91100EA1BED /* Parser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Parser.hpp; sourceTree = "<group>"; };
+		5576DAA51C07C524008D062B /* RecordTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordTypes.swift; sourceTree = "<group>"; };
 		8D0C4E960486CD37000505A6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D2E6DC3152FEFF600E5C046 /* Undo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Undo.h; sourceTree = "<group>"; };
 		9D2E6DC6152FF00700E5C046 /* Undo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Undo.cpp; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 				552C91561C06295800EA1BED /* Swift BOA Editor-Bridging-Header.h */,
 				552C91481C061C8500EA1BED /* AppDelegate.swift */,
 				552C91681C06366E00EA1BED /* Globals.swift */,
+				5576DAA51C07C524008D062B /* RecordTypes.swift */,
 				552C916A1C06378A00EA1BED /* GraphicID.swift */,
 				552C91541C06230800EA1BED /* Rect.swift */,
 				552C914A1C061C8500EA1BED /* Assets.xcassets */,
@@ -656,6 +659,7 @@
 			files = (
 				552C916B1C06378A00EA1BED /* GraphicID.swift in Sources */,
 				552C91691C06366E00EA1BED /* Globals.swift in Sources */,
+				5576DAA61C07C524008D062B /* RecordTypes.swift in Sources */,
 				552C91491C061C8500EA1BED /* AppDelegate.swift in Sources */,
 				552C91551C06230800EA1BED /* Rect.swift in Sources */,
 				552C91591C06295800EA1BED /* ResourceBridging.m in Sources */,
@@ -995,6 +999,7 @@
 				552C917E1C0660DC00EA1BED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C0E91AC508A95435008D54AB /* Build configuration list for PBXNativeTarget "3D BoA Editor" */ = {
 			isa = XCConfigurationList;

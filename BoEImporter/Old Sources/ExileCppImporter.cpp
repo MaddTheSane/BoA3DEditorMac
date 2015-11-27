@@ -33,6 +33,8 @@
 #include "Graphics.h"
 #include <string>
 
+#define kBoEImporterErrorDomain CFSTR("com.github.maddthesane.swiftboaeditor.boeimporter.error")
+
 extern bool load_core_scenario_data();
 
 
@@ -72,7 +74,10 @@ static void port_a_special_node(old_blades_special_node_type *node,short node_nu
 static void port_dialogue_intro_text(short *current_dialogue_node,short which_slot,short file_id,short town_being_ported);
 
 
-static void handle_messages(short file_id,short node_type,short message_1,short message_2);
+static int save_campaign();
+
+
+static void handle_messages(FSIORefNum file_id,short node_type,short message_1,short message_2);
 
 
 static bool is_old_road(short i,short j);
@@ -107,8 +112,6 @@ extern big_tr_type t_d;
 extern outdoor_record_type current_terrain;
 extern scen_item_data_type scen_data;
 extern zone_names_data_type zone_names;
-extern short cur_town;
-extern location cur_out;
 extern short town_type ;
 extern Boolean editing_town;
 extern short overall_mode;
@@ -147,10 +150,14 @@ static town_record_type warrior_grove_town;
 static ave_tr_type warrior_grove_terrain;
 static outdoor_record_type warrior_grove_out;
 
-static short scen_resource_file = -1;
 
-bool script_editor_set=false;
-FSRef script_editor_ref;
+static short cur_town;
+static location cur_out;
+
+//static short scen_resource_file = -1;
+
+Boolean change_made_town = FALSE, change_made_outdoors = FALSE;
+
 
 static OSStatus CFURLToFSSpec (CFURLRef pathURL, FSSpec *outSpec);
 
@@ -422,7 +429,7 @@ bool init_directories_with_user_input( void );
 void print_write_position ();
 static Boolean open_scenario_save_file(short * file_id, char *file_name, FSSpec *spec, short err_code, short beep_duration);
 
-OSErr GetApplicationPackageFSSpecFromBundle(FSSpecPtr theFSSpecPtr)
+static OSErr GetApplicationPackageFSSpecFromBundle(FSSpecPtr theFSSpecPtr)
 {
 	OSErr err = fnfErr;
 	CFBundleRef myAppsBundle = CFBundleGetMainBundle();
@@ -436,7 +443,7 @@ OSErr GetApplicationPackageFSSpecFromBundle(FSSpecPtr theFSSpecPtr)
 	return FSGetCatalogInfo(&myBundleRef, kFSCatInfoNone, NULL, NULL, theFSSpecPtr, NULL);
 }
 
-void open_Appl_resource( const char * rsrc_file )
+static void open_Appl_resource( const char * rsrc_file )
 {
 	FSSpec appl_Spec;
 	FSSpec res_Spec;
@@ -490,7 +497,7 @@ bool setBladesDirectory(CFURLRef boa)
 	}
 }
 
-OSStatus open_BOA_resources( const char * theResFile )
+static OSStatus open_BOA_resources( const char * theResFile )
 {
 	Str255 resFile;
 	char msg[256];
@@ -531,7 +538,7 @@ short str_to_num(Str255 str)
 	return (short) l;
 }
 
-Boolean create_basic_scenario(char *scen_name_short,char *scen_name_with_ext,char *scen_full_name,short out_width,short out_height,short on_surface,Boolean use_warriors_grove)
+static Boolean create_basic_scenario(char *scen_name_short,char *scen_name_with_ext,char *scen_full_name,short out_width,short out_height,short on_surface,Boolean use_warriors_grove)
 {
 	short i,j,num_outdoors;
 	FSSpec new_scen_file;
@@ -660,7 +667,7 @@ Boolean create_basic_scenario(char *scen_name_short,char *scen_name_with_ext,cha
 	}	
 
 	// now, everything is moved over. Delete the original, and rename the dummy
-	FSClose(scen_file_id);		
+	FSCloseFork(scen_file_id);		
 	current_scenario_file_info = new_scen_file;
 	current_scenario_is_little_endian = endianness.isLittle;
 
@@ -711,11 +718,11 @@ bool copy_script(const char *script_source_name,const char *script_dest_name)
 	GetEOF(file_id,&file_length);
 	
 	if (file_length == 0) {
-		FSClose(file_id);
+		FSCloseFork(file_id);
 		return TRUE;
 	}
 		
-	error = FSClose(file_id);
+	error = FSCloseFork(file_id);
 	if (error != 0) {return FALSE;}
 	
 	text_block = NewPtr(file_length + 25);
@@ -728,7 +735,7 @@ bool copy_script(const char *script_source_name,const char *script_dest_name)
 	if ((error = FSRead(file_id, &file_length, (char *) text_block)) != 0)
 		{return FALSE;}
 	
-	error = FSClose(file_id);
+	error = FSCloseFork(file_id);
 	if (error != 0) {return FALSE;}
 
 	// finally create and write to new file
@@ -741,11 +748,11 @@ bool copy_script(const char *script_source_name,const char *script_dest_name)
 	if (error != 0) {return FALSE;}
 
 	if ((error = FSWrite(file_id, &file_length, text_block)) != 0) {
-		FSClose(file_id);
+		FSCloseFork(file_id);
 		return FALSE;
 	}	
 	
-	error = FSClose(file_id);
+	error = FSCloseFork(file_id);
 	if (error != 0) {return FALSE;}
 		
 	DisposePtr(text_block);
@@ -771,22 +778,22 @@ void init_warriors_grove()
 	
 	len = (long) sizeof(scenario_data_type);
 	if ((error = FSRead(file_id, &len, (char *) &scenario)) != 0){
-		FSClose(file_id); return;
+		FSCloseFork(file_id); return;
 	}
 
 	len = (long) sizeof(outdoor_record_type);
 	if ((error = FSRead(file_id, &len, (char *) &warrior_grove_out)) != 0){
-		FSClose(file_id); return;
+		FSCloseFork(file_id); return;
 	}
 
 	len = (long) sizeof(town_record_type);
 	if ((error = FSRead(file_id, &len, (char *) &warrior_grove_town)) != 0){
-		FSClose(file_id); return;
+		FSCloseFork(file_id); return;
 	}
 
 	len = (long) sizeof(ave_tr_type);
 	if ((error = FSRead(file_id, &len, (char *) &warrior_grove_terrain)) != 0){
-		FSClose(file_id); return;
+		FSCloseFork(file_id); return;
 	}
 	
 	if(scenario.scenario_platform() != endianness.isLittle){
@@ -796,7 +803,7 @@ void init_warriors_grove()
 		warrior_grove_terrain.port();
 	}
 
-	FSClose(file_id);
+	FSCloseFork(file_id);
 }
 
 //Taken from OS X's Kerberos source code file FSpUtils.c, as found ot:
@@ -904,17 +911,18 @@ OSStatus CFURLToFSSpec (CFURLRef pathURL, FSSpec *outSpec)
 bool importBladesOfExileScenario(CFURLRef oldBoE, CFURLRef newBoA, CFErrorRef *errorOut)
 {
 #define oops_error(num) 		if (errorOut) { \
-	*errorOut = CFErrorCreate(kCFAllocatorDefault, kCFErrorDomainOSStatus, num, NULL); \
+	*errorOut = CFErrorCreate(kCFAllocatorDefault, kBoEImporterErrorDomain, num, NULL); \
 }
 
-	short i,j,file_id,new_scen_id;
+	short i,j;
+	FSIORefNum file_id, new_scen_id;
 	long len;
 	//StandardFileReply s_reply;
 	Boolean file_ok = FALSE;
 	OSStatus error;
 	char import_source_name[256];
 	FSSpec new_scen_file;
-	long new_directory;
+	SInt32 new_directory;
 
 	cur_scen_is_mac = TRUE;
 	
@@ -942,13 +950,17 @@ bool importBladesOfExileScenario(CFURLRef oldBoE, CFURLRef newBoA, CFErrorRef *e
 	}
 	
 	if ( open_scenario_save_file( &file_id, import_source_name, &fileToOpen, 300, 0) == FALSE ) {
+		if (errorOut) {
+			*errorOut = CFErrorCreate(kCFAllocatorDefault, kBoEImporterErrorDomain, 300, NULL);
+		}
+
 		return false;
 	}
 	
 	// STEP 2 load all BoE scenario data
 	len = (long) sizeof(old_blades_scenario_data_type);
 	if ((error = FSRead(file_id, &len, (char *) &boe_scenario)) != 0){
-		FSClose(file_id);
+		FSCloseFork(file_id);
 		oops_error(301);
 		return false;
 	}
@@ -965,15 +977,20 @@ bool importBladesOfExileScenario(CFURLRef oldBoE, CFURLRef newBoA, CFErrorRef *e
 	  	file_ok = TRUE;
 	  	boe_port_scenario();
 	}
-	 if (file_ok == FALSE) {
-		FSClose(file_id); 
+	if (file_ok == FALSE) {
+		FSCloseFork(file_id);
 		give_error("This is not a legitimate Blades of Exile scenario.","",0);
+		if (errorOut) {
+			*errorOut = CFErrorCreate(kCFAllocatorDefault, kBoEImporterErrorDomain, 0, NULL);
+		}
 		return false;
 	}
 
 	len = sizeof(old_blades_scen_item_data_type); // item data
 	if ((error = FSRead(file_id, &len, (char *) &boe_scen_data)) != 0) {
-		FSClose(file_id); oops_error(302); return false;
+		FSCloseFork(file_id);
+		oops_error(302);
+		return false;
 	}
 	if (cur_scen_is_mac == FALSE)
 		boe_port_item_list();
@@ -981,7 +998,7 @@ bool importBladesOfExileScenario(CFURLRef oldBoE, CFURLRef newBoA, CFErrorRef *e
 	for (i = 0; i < 270; i++) {
 		len = (long) (boe_scenario.scen_str_len[i]);
 		if ((error = FSRead(file_id, &len, (char *) &(boe_scen_text.scen_strs[i]))) != 0) {
-			FSClose(file_id);
+			FSCloseFork(file_id);
 			oops_error(303);
 			return false;
 		}
@@ -1046,6 +1063,9 @@ bool importBladesOfExileScenario(CFURLRef oldBoE, CFURLRef newBoA, CFErrorRef *e
 			p2c(new_scen_name);
 			sprintf(err_str,"Tried to create scenario with name %s, but there was already a file or folder there with that name.",(char *) new_scen_name);
 			give_error(err_str,"",0);
+			if (errorOut) {
+				*errorOut = CFErrorCreate(kCFAllocatorDefault, kBoEImporterErrorDomain, 0, NULL);
+			}
 			return false;
 		}
 	}
@@ -1092,7 +1112,7 @@ bool importBladesOfExileScenario(CFURLRef oldBoE, CFURLRef newBoA, CFErrorRef *e
 			// load outdoor terrain
 			len = (long) sizeof(old_blades_outdoor_record_type);
 			if ((error = FSRead(file_id, &len, (char *) &boe_outdoor)) != 0){
-				FSClose(file_id);
+				FSCloseFork(file_id);
 				oops_error(308);
 				return false;
 			}
@@ -1122,8 +1142,10 @@ bool importBladesOfExileScenario(CFURLRef oldBoE, CFURLRef newBoA, CFErrorRef *e
 			
 			// write ported outdoor section
 			len = sizeof(outdoor_record_type);
-			if ((error = FSWrite(new_scen_id, &len, (char *) &current_terrain)) != 0) 
-				{oops_error(309); return false;}
+			if ((error = FSWrite(new_scen_id, &len, (char *) &current_terrain)) != 0) {
+				oops_error(309);
+				return false;
+			}
 		}
 	}
 	// STEP 4 Load in towns, one at a time, and port them.
@@ -1131,7 +1153,7 @@ bool importBladesOfExileScenario(CFURLRef oldBoE, CFURLRef newBoA, CFErrorRef *e
 		len = sizeof(old_blades_town_record_type);
 		error = FSRead(file_id, &len , (char *) &boe_town);
 		if (error != 0) {
-			FSClose(file_id);
+			FSCloseFork(file_id);
 			oops_error(310);
 			return false;
 		}
@@ -1154,18 +1176,21 @@ bool importBladesOfExileScenario(CFURLRef oldBoE, CFURLRef newBoA, CFErrorRef *e
 				error = FSRead(file_id,&len , (char *) &boe_tiny_town);
 				break;
 		}
-		if (error != 0) {FSClose(file_id);oops_error(311); }
+		if (error != 0) {
+			FSCloseFork(file_id);
+			oops_error(311);
+		}
 		
 		for (i = 0; i < 140; i++) {
 			len = (long) (boe_town.strlens[i]);
 			FSRead(file_id, &len, (char *) &(boe_scen_text.town_strs[i]));
 			boe_scen_text.town_strs[i][len] = 0;
-			}
+		}
 
 		len = sizeof(old_blades_talking_record_type);
 		error = FSRead(file_id, &len , (char *) &boe_talk_data);
 		if (error != 0) {
-			FSClose(file_id);
+			FSCloseFork(file_id);
 			oops_error(312);
 			return false;
 		}
@@ -1176,7 +1201,7 @@ bool importBladesOfExileScenario(CFURLRef oldBoE, CFURLRef newBoA, CFErrorRef *e
 			len = (long) (boe_talk_data.strlens[i]);
 			FSRead(file_id, &len, (char *) &(boe_scen_text.talk_strs[i]));
 			boe_scen_text.talk_strs[i][len] = 0;
-			}
+		}
 
 
 		// port town terrain
@@ -1206,8 +1231,10 @@ bool importBladesOfExileScenario(CFURLRef oldBoE, CFURLRef newBoA, CFErrorRef *e
 
 		// write ported town
 		len = sizeof(town_record_type);
-		if ((error = FSWrite(new_scen_id, &len, (char *) &town)) != 0) 
-			{oops_error(313); return false;}
+		if ((error = FSWrite(new_scen_id, &len, (char *) &town)) != 0) {
+			oops_error(313);
+			return false;
+		}
 		
 		town_type = scenario.town_size[m];
 		set_up_lights();
@@ -1229,7 +1256,7 @@ bool importBladesOfExileScenario(CFURLRef oldBoE, CFURLRef newBoA, CFErrorRef *e
 				}
 				len = sizeof(ave_tr_type);
 				FSWrite(new_scen_id, &len, (char *) &ave_t);
-			break;
+				break;
 		
 			case 2:
 				for (i = 0; i < 32; i++)
@@ -1249,8 +1276,8 @@ bool importBladesOfExileScenario(CFURLRef oldBoE, CFURLRef newBoA, CFErrorRef *e
 		}
 		
 	// STEP 5 close stuff up
-	FSClose(new_scen_id);
-	FSClose(file_id);
+	FSCloseFork(new_scen_id);
+	FSCloseFork(file_id);
 	
 	// copy over needed generic scripts
 	copy_script("trap.txt","trap.txt");
@@ -1259,7 +1286,236 @@ bool importBladesOfExileScenario(CFURLRef oldBoE, CFURLRef newBoA, CFErrorRef *e
 	copy_script("basicnpc.txt","basicnpc.txt");
 	copy_script("guard.txt","guard.txt");
 	
+	error = save_campaign();
+	
+	if (error != noErr) {
+		oops_error(error);
+		return false;
+	}
+	
 	return true;
+#undef oops_error
+}
+
+static int abortSave(FSIORefNum file1, FSIORefNum file2, int error)
+{
+	FSClose(file1);
+	FSClose(file2);
+	oops_error(error);
+	return(error);
+}
+
+// Here we go. this is going to hurt.
+// Note no save as is available for scenarios.
+// At this point, current_scenario_file_info MUST contain the FSSPEC for the currently edited scen.
+// Strategy ... assemble a big Dummy file containing the whole scenario
+// chunk by chunk, copy the dummy over the original, and delete the dummy
+// the whole scenario is too big be be shifted around at once
+int save_campaign()
+{
+#define oops_error(num) return num
+	short i,j,k,num_outdoors;
+	FSSpec to_load,dummy_file;
+	short dummy_f,scen_f;
+	char *buffer = NULL;
+	Size buf_len = 100000;
+	OSErr error;
+	short out_num;
+	long len,scen_ptr_move = 0,save_town_size = 0,save_out_size = 0;
+	outdoor_record_type *dummy_out_ptr;
+	
+	// before saving, do all the final processing that needs to be done (like readjusting lights)
+	set_up_lights();
+	
+	//OK. FIrst find out what file name we're working with, and make the dummy file
+	// which we'll build the new scenario in
+	to_load = current_scenario_file_info;
+	FSMakeFSSpec(current_scenario_file_info.vRefNum,current_scenario_file_info.parID,"\pBoA scenario temp",&dummy_file);
+	FSpDelete(&dummy_file);
+	error = FSpCreate(&dummy_file,'BoA^','BoAX',smSystemScript);
+	if ((error != 0) && (error != dupFNErr)) {
+		if (error != 0) {oops_error(59);}
+		return -1;
+	}
+	if ((error = FSpOpenDF(&dummy_file,3,&dummy_f)) != 0) {
+		oops_error(60);
+		//return;
+	}
+	if ((error = FSpOpenDF(&to_load,3,&scen_f)) != 0) {
+		oops_error(61);
+		//return;
+	}
+	
+	// Now we need to set up a buffer for moving the data over to the dummy
+	buffer = (char *) NewPtr(buf_len);
+	if (buffer == NULL) {
+		return abortSave(scen_f,dummy_f,62);
+	}
+	
+	scenario.prog_make_ver[0] = 2;
+	scenario.prog_make_ver[1] = 0;
+	scenario.prog_make_ver[2] = 0;
+	
+	// Now, the pointer in scen_f needs to move along, so that the correct towns are sucked in.
+	// To do so, we'll remember the size of the saved town and out now.
+	// this is much simple thabn it was in Blades of Exile, since chunks have a constant length now
+	out_num = cur_out.y * scenario.out_width + cur_out.x;
+	save_out_size = (long) (sizeof (outdoor_record_type));
+	save_town_size = (long) (sizeof (town_record_type));
+	if (scenario.town_size[cur_town] == 0)
+		save_town_size += (long) (sizeof (big_tr_type));
+	else if (scenario.town_size[cur_town] == 1)
+		save_town_size += (long) (sizeof (ave_tr_type));
+	else
+		save_town_size += (long) (sizeof (tiny_tr_type));
+	scen_ptr_move = sizeof(scenario_data_type);
+	
+	scenario.last_town_edited = cur_town;
+	scenario.last_out_edited = cur_out;
+	
+	// now, if editing windows scenario, we need to write it in a windows friendly way.
+	if (current_scenario_is_little_endian != endianness.isLittle)
+		scenario.port();
+	
+	len = sizeof(scenario_data_type); // scenario data
+	if ((error = FSRead(scen_f, &len, (char *) &temp_scenario)) != 0)
+		abortSave(scen_f,dummy_f,201);
+	if ((error = FSWrite(dummy_f, &len, (char *) &scenario)) != 0){
+		return abortSave(scen_f,dummy_f,62);
+	}
+	
+	if (current_scenario_is_little_endian != endianness.isLittle)
+		scenario.port();
+	
+	SetFPos(scen_f,1,scen_ptr_move);
+	
+	// OK ... scenario written. Now outdoors.
+	num_outdoors = scenario.out_width * scenario.out_height;
+	for (i = 0; i < num_outdoors; i++){
+		if (i == out_num) {
+			if (current_scenario_is_little_endian != endianness.isLittle)
+				current_terrain.port();
+			
+			len = sizeof(outdoor_record_type);
+			error = FSWrite(dummy_f, &len, (char *) &current_terrain);
+			
+			if (current_scenario_is_little_endian != endianness.isLittle)
+				current_terrain.port();
+			
+			if (error != 0)
+				abortSave(scen_f,dummy_f,63);
+			
+			
+			SetFPos(scen_f,3,save_out_size);
+		}
+		else {
+			len = (long) (sizeof (outdoor_record_type));
+			error = FSRead(scen_f, &len, buffer);
+			dummy_out_ptr = (outdoor_record_type *) buffer;
+			//port_out(dummy_out_ptr);
+			if (error != 0)
+				abortSave(scen_f,dummy_f,64);
+			if ((error = FSWrite(dummy_f, &len, buffer)) != 0) {
+				return abortSave(scen_f,dummy_f,65);
+			}
+		}
+	}
+	// now, finally, write towns.
+	for (k = 0; k < scenario.num_towns; k++){
+		if (k == cur_town) {
+			// write towns
+			if (current_scenario_is_little_endian != endianness.isLittle)
+				town.port();
+			len = sizeof(town_record_type);
+			error = FSWrite(dummy_f, &len, (char *) &town);
+			
+			if (current_scenario_is_little_endian != endianness.isLittle)
+				town.port();
+			if (error != 0)
+				abortSave(scen_f,dummy_f,66);
+			if (current_scenario_is_little_endian != endianness.isLittle)
+				t_d.port();
+			switch (scenario.town_size[cur_town]) {
+				case 0:
+					len = sizeof(big_tr_type);
+					FSWrite(dummy_f, &len, (char *) &t_d);
+					break;
+				case 1:
+					for (i = 0; i < 48; i++){
+						for (j = 0; j < 48; j++) {
+							ave_t.terrain[i][j] = t_d.terrain[i][j];
+							ave_t.floor[i][j] = t_d.floor[i][j];
+							ave_t.height[i][j] = t_d.height[i][j];
+							ave_t.lighting[i][j] = t_d.lighting[i][j];
+						}
+					}
+					len = sizeof(ave_tr_type);
+					FSWrite(dummy_f, &len, (char *) &ave_t);
+					break;
+				case 2:
+					for (i = 0; i < 32; i++){
+						for (j = 0; j < 32; j++) {
+							tiny_t.terrain[i][j] = t_d.terrain[i][j];
+							tiny_t.floor[i][j] = t_d.floor[i][j];
+							tiny_t.height[i][j] = t_d.height[i][j];
+							tiny_t.lighting[i][j] = t_d.lighting[i][j];
+						}
+					}
+					len = sizeof(tiny_tr_type);
+					FSWrite(dummy_f, &len, (char *) &tiny_t);
+					break;
+			}
+			if (current_scenario_is_little_endian != endianness.isLittle)
+				t_d.port();
+			switch (temp_scenario.town_size[k]) {
+				case 0: len = (long) ( sizeof(big_tr_type)); break;
+				case 1: len = (long) ( sizeof(ave_tr_type)); break;
+				case 2: len = (long) ( sizeof(tiny_tr_type)); break;
+			}
+			len+=(long) (sizeof (town_record_type));
+			SetFPos(scen_f,3,len);
+		}
+		else { /// load unedited town into buffer and save, doing translataions when necessary
+			len = (long) (sizeof(town_record_type));
+			error = FSRead(scen_f, &len, buffer);
+			if (error != 0)
+				abortSave(scen_f,dummy_f,67);
+			//port_dummy_town();
+			if ((error = FSWrite(dummy_f, &len, buffer)) != 0) {
+				return abortSave(scen_f,dummy_f,68);
+			}
+			switch (scenario.town_size[k]) {
+				case 0: len = (long) ( sizeof(big_tr_type)); break;
+				case 1: len = (long) ( sizeof(ave_tr_type)); break;
+				case 2: len = (long) ( sizeof(tiny_tr_type)); break;
+			}
+			
+			error = FSRead(scen_f, &len, buffer);
+			if (error != 0)
+				abortSave(scen_f,dummy_f,69);
+			//port_dummy_t_d(scenario.town_size[k],buffer);
+			if ((error = FSWrite(dummy_f, &len, buffer)) != 0) {
+				return abortSave(scen_f,dummy_f,70);
+			}
+		}
+	}
+	change_made_town = change_made_outdoors = FALSE;
+	// now, everything is moved over. Delete the original, and rename the dummy
+	error = FSClose(scen_f);
+	if (error != 0)
+		abortSave(scen_f,dummy_f,71);
+	cur_scen_is_mac = TRUE;
+	error = FSClose(dummy_f);
+	if (error != 0)
+		abortSave(scen_f,dummy_f,72);
+	error = FSpExchangeFiles(&to_load,&dummy_file);
+	if (error != 0)
+		abortSave(scen_f,dummy_f,73);
+	DisposePtr(buffer);
+	FSMakeFSSpec(current_scenario_file_info.vRefNum,current_scenario_file_info.parID,"\pBoA scenario temp",&dummy_file);
+	FSpDelete(&dummy_file);
+	
+	return noErr;
 #undef oops_error
 }
 
@@ -1285,7 +1541,7 @@ void port_boe_scenario_data()
 	for ( i = 0; i < scenario.num_towns; i++) {
 		scenario.town_size[i] = boe_scenario.town_size[i];
 		scenario.town_starts_hidden[i] = boe_scenario.town_hidden[i];
-		}
+	}
 		
 	scenario.start_in_what_town = boe_scenario.which_town_start;
 	scenario.what_start_loc_in_town = boe_scenario.where_start;
@@ -1296,7 +1552,7 @@ void port_boe_scenario_data()
 		scenario.town_to_add_to[i] = boe_scenario.town_to_add_to[i];
 		scenario.flag_to_add_to_town[i][0] = boe_scenario.flag_to_add_to_town[i][0];
 		scenario.flag_to_add_to_town[i][1] = boe_scenario.flag_to_add_to_town[i][1];
-		}
+	}
 	//for ( i = 0; i < 30; i++) {
 	//	scenario.scen_boats[i] = boe_scenario.scen_boats[i];
 	//	scenario.scen_horses[i] = boe_scenario.scen_horses[i];
@@ -1458,7 +1714,7 @@ bool is_old_road(short i,short j)
 	return FALSE;
 }
 
-Boolean is_old_wall(short ter)
+bool is_old_wall(short ter)
 {
 	if ((ter >= 5) && (ter <= 35))
 		return TRUE;
@@ -2190,8 +2446,7 @@ void port_scenario_script(Str255 script_name,long directory_id)
 		if ((boe_scenario.scen_specials[i].type > 0) || (boe_scenario.scen_specials[i].jumpto > 0))
 			port_a_special_node(&boe_scenario.scen_specials[i],i,file_id,0);
 	
-	FSClose(file_id);
-
+	FSCloseFork(file_id);
 }
 
 void port_town_script(Str255 script_name,long directory_id,short which_town)
@@ -2283,7 +2538,7 @@ void port_town_script(Str255 script_name,long directory_id,short which_town)
 		if ((boe_town.specials[i].type > 0) || (boe_town.specials[i].jumpto > 0))
 			port_a_special_node(&boe_town.specials[i],i,file_id,1);
 	
-	FSClose(file_id);
+	FSCloseFork(file_id);
 
 }
 
@@ -2348,7 +2603,7 @@ void port_town_dialogue_script(Str255 script_name,long directory_id,short which_
 		if (boe_talk_data.talk_nodes[j].personality == -2)
 			port_dialogue_node(&current_dialogue_node,0,file_id,j,which_town);
 	}
-	FSClose(file_id);
+	FSCloseFork(file_id);
 }
 
 
@@ -2404,7 +2659,7 @@ void port_outdoor_script(Str255 script_name,long directory_id,short sector_x,sho
 		if ((boe_outdoor.specials[i].type > 0) || (boe_outdoor.specials[i].jumpto > 0))
 			port_a_special_node(&boe_outdoor.specials[i],i,file_id,2);
 	}
-	FSClose(file_id);
+	FSCloseFork(file_id);
 }
 
 //node_type: 0 - scenario, 1 - town, 2 - outdoor
@@ -3763,7 +4018,7 @@ void port_dialogue_node(short *current_dialogue_node,short which_slot,short file
 	add_cr(file_id);
 }
 
-void handle_messages(short file_id,short node_type,short message_1,short message_2)
+void handle_messages(FSIORefNum file_id,short node_type,short message_1,short message_2)
 {
 	char str1[400] = "",str2[400] = "";
 	
@@ -3804,7 +4059,7 @@ void get_bl_str(char *str,short str_type,short str_num)
 			str[i] = '_';
 }
 
-void add_short_string_to_file(short file_id,const char *str1,short num,const char *str2)
+void add_short_string_to_file(FSIORefNum file_id,const char *str1,short num,const char *str2)
 {
 	char message[400];
 	
@@ -3815,7 +4070,7 @@ void add_short_string_to_file(short file_id,const char *str1,short num,const cha
 	add_string_to_file(file_id,message);
 	add_cr(file_id);
 }
-void add_big_string_to_file(short file_id,const char *str1,short num1,const char *str2,short num2,const char *str3,short num3,const char *str4)
+void add_big_string_to_file(FSIORefNum file_id,const char *str1,short num1,const char *str2,short num2,const char *str3,short num3,const char *str4)
 {
 	char message[400];
 	
@@ -3832,13 +4087,13 @@ void add_big_string_to_file(short file_id,const char *str1,short num1,const char
 	add_cr(file_id);
 }
 
-void add_string(short file_id,const char *str)
+void add_string(FSIORefNum file_id,const char *str)
 {
 	add_string_to_file(file_id,str);
 	add_cr(file_id);
 }
 
-void add_string_to_file(short file_id,const char *str)
+void add_string_to_file(FSIORefNum file_id,const char *str)
 {
 	if (strlen(str) == 0)
 		return;
@@ -3855,7 +4110,7 @@ void add_string_to_file(short file_id,const char *str)
 	FSWrite(file_id, &len, str);
 }
 
-void add_cr(short file_id)
+void add_cr(FSIORefNum file_id)
 {
 	add_string_to_file(file_id,"\r");
 }
@@ -3894,49 +4149,3 @@ Boolean open_scenario_save_file( short * file_id, char *file_name, FSSpec *impor
 		p2cstrcpy( file_name, import_source->name );
 	return TRUE;	
 }
-
-#if 0
-// this is to fix a bug from a while ago. it can also
-// eliminate random bad data from file corruptions
-void kludge_correct_old_bad_data()
-{
-	short q,r;
-	
-	for (q = 0; q < ((editing_town) ? max_zone_dim[town_type] : 48); q++){
-		for (r = 0; r < ((editing_town) ? max_zone_dim[town_type] : 48); r++) {
-			if (editing_town) {
-				t_d.terrain[q][r] = minmax(0,511,t_d.terrain[q][r]);
-				t_d.floor[q][r] = minmax(0,255,t_d.floor[q][r]);
-			}
-			else {
-				current_terrain.terrain[q][r] = minmax(0,511,current_terrain.terrain[q][r]);
-				current_terrain.floor[q][r] = minmax(0,255,current_terrain.floor[q][r]);
-			}
-		}
-	}
-}
-
-//If the result is non-NULL the caller is responsible for fee()'ing it
-//Reurns NULL if a problem occurs
-char* get_scenario_filename(){
-	if(!file_is_loaded)
-		return(NULL);
-	FSRef scenRef;
-	OSErr err;
-	err = FSpMakeFSRef (&current_scenario_file_info,&scenRef);
-	if(err!=noErr) return(NULL);
-	UInt8 scenPath[512];
-	err = FSRefMakePath (&scenRef,&scenPath[0],510);
-	if(err!=noErr) return(NULL);
-	UInt8* dir=(UInt8*)strrchr((char*)scenPath,'/');
-	UInt8* ext=(UInt8*)strrchr((char*)scenPath,'.');
-	if(!dir || !ext || dir>=ext || (ext-dir)>512)
-		return(NULL);
-	dir++;
-	char* name=(char*)malloc(ext-dir+1);
-	*ext='\0';
-	strcpy(name, (char*)dir);
-	return(name);
-}
-
-#endif

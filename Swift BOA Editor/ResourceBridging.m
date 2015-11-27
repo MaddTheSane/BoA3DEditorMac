@@ -44,7 +44,16 @@
 
 + (nullable NSData*)resourceDataFromType:(OSType)type resID:(SInt16)resID;
 {
-	return nil;
+	Handle k = GetResource(type, resID);
+	if (k == NULL) {
+		return nil;
+	}
+	DetachResource(k);
+	//HLock(k);
+	NSData *aResData = [[NSData alloc] initWithBytes:*k length:GetHandleSize(k)];
+	//HUnlock(k);
+	DisposeHandle(k);
+	return aResData;
 }
 
 + (nullable NSImage*)PICTImageAtResID:(SInt16)resID
