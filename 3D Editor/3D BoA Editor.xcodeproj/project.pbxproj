@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5598BAFA1C08D85F00D27BDB /* Bl A Sounds.r in Rez */ = {isa = PBXBuildFile; fileRef = 5598BAF81C08D85100D27BDB /* Bl A Sounds.r */; };
+		5598BAFC1C08D8D600D27BDB /* Dungeon Bold.r in Rez */ = {isa = PBXBuildFile; fileRef = 5598BAFB1C08D8D600D27BDB /* Dungeon Bold.r */; };
+		5598BAFE1C08DD4100D27BDB /* Bl A Patterns.r in Rez */ = {isa = PBXBuildFile; fileRef = 5598BAFD1C08DD4100D27BDB /* Bl A Patterns.r */; };
+		5598BB011C08DE8100D27BDB /* Bl A Icons.r in Rez */ = {isa = PBXBuildFile; fileRef = 5598BAFF1C08DE7300D27BDB /* Bl A Icons.r */; };
+		5598BB031C08E1DD00D27BDB /* Bl A Dialogs and Windows.r in Rez */ = {isa = PBXBuildFile; fileRef = 5598BB021C08E1DD00D27BDB /* Bl A Dialogs and Windows.r */; };
 		8D0C4E8D0486CD37000505A6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0867D6AAFE840B52C02AAC07 /* InfoPlist.strings */; };
 		8D0C4E920486CD37000505A6 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20286C33FDCF999611CA2CEA /* Carbon.framework */; };
 		9D2E6DC7152FF00700E5C046 /* Undo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E6DC6152FF00700E5C046 /* Undo.cpp */; };
@@ -87,6 +92,11 @@
 		5048396D09E3307300765E4B /* 3D BoA EditorProj.xcconfig */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xcconfig; path = "3D BoA EditorProj.xcconfig"; sourceTree = "<group>"; };
 		5048396E09E3307300765E4B /* 3D BoA EditorTarget.xcconfig */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xcconfig; path = "3D BoA EditorTarget.xcconfig"; sourceTree = "<group>"; };
 		508344B209E5C41E0093A071 /* 3D BoA Editor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "3D BoA Editor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5598BAF81C08D85100D27BDB /* Bl A Sounds.r */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; path = "Bl A Sounds.r"; sourceTree = "<group>"; };
+		5598BAFB1C08D8D600D27BDB /* Dungeon Bold.r */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; path = "Dungeon Bold.r"; sourceTree = "<group>"; };
+		5598BAFD1C08DD4100D27BDB /* Bl A Patterns.r */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; path = "Bl A Patterns.r"; sourceTree = "<group>"; };
+		5598BAFF1C08DE7300D27BDB /* Bl A Icons.r */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; path = "Bl A Icons.r"; sourceTree = "<group>"; };
+		5598BB021C08E1DD00D27BDB /* Bl A Dialogs and Windows.r */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; path = "Bl A Dialogs and Windows.r"; sourceTree = "<group>"; };
 		8D0C4E960486CD37000505A6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D2E6DC3152FEFF600E5C046 /* Undo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Undo.h; sourceTree = "<group>"; };
 		9D2E6DC6152FF00700E5C046 /* Undo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Undo.cpp; sourceTree = "<group>"; };
@@ -202,7 +212,12 @@
 				9DF52BEF12CFCCA300D01803 /* 3D_BoA_su_dsa_pub.pem */,
 				9DF52BF012CFCCA300D01803 /* image_resources */,
 				9DF52C1212CFCCA400D01803 /* BoAScen.icns */,
+				5598BAFB1C08D8D600D27BDB /* Dungeon Bold.r */,
 				9DF52C1312CFCCA400D01803 /* Bl A Editor.r */,
+				5598BB021C08E1DD00D27BDB /* Bl A Dialogs and Windows.r */,
+				5598BAFF1C08DE7300D27BDB /* Bl A Icons.r */,
+				5598BAFD1C08DD4100D27BDB /* Bl A Patterns.r */,
+				5598BAF81C08D85100D27BDB /* Bl A Sounds.r */,
 				9DF52C1412CFCCA400D01803 /* BoAEdAPPL.icns */,
 				8D0C4E960486CD37000505A6 /* Info.plist */,
 				0867D6AAFE840B52C02AAC07 /* InfoPlist.strings */,
@@ -396,7 +411,12 @@
 			isa = PBXRezBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5598BB011C08DE8100D27BDB /* Bl A Icons.r in Rez */,
+				5598BAFC1C08D8D600D27BDB /* Dungeon Bold.r in Rez */,
+				5598BB031C08E1DD00D27BDB /* Bl A Dialogs and Windows.r in Rez */,
+				5598BAFA1C08D85F00D27BDB /* Bl A Sounds.r in Rez */,
 				9DF52D2212CFE6FD00D01803 /* Bl A Editor.r in Rez */,
+				5598BAFE1C08DD4100D27BDB /* Bl A Patterns.r in Rez */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
