@@ -17,7 +17,11 @@
 //#include "stdlib.h"
 //#include <ctype.h>
 #include "global.h"
+#include "EdGlobal.h"
+#include "EdParser.h"
+#include "EdUtils.h"
 #include "tokntype.h"
+#include "Graphics.hpp"
 
 
 // stacks for evaluating numerical expressions

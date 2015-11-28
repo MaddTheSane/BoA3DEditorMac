@@ -47,8 +47,18 @@
 //#include <Palettes.h>
 
 #include <Sparkle/SUCarbonAPI.h>
+#include "sound.hpp"
 #include "global.h"
+#include "EdUtils.h"
+#include "EdGlobal.h"
+#include "EdFcns.h"
+#include "FileIO.hpp"
+#include "Graphics.hpp"
+#include "dlogtool.h"
 #include "Undo.h"
+#include "keydlgs.h"
+#include "townout.h"
+
 
 extern Rect terrain_rects[516]; //was 264
 

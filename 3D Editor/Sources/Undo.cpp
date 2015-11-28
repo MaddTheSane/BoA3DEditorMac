@@ -7,6 +7,7 @@
  */
 
 #include "Undo.h"
+#include "EdFcns.h"
 #include <stdexcept>
 
 extern scenario_data_type scenario;

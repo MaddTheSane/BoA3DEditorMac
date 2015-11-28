@@ -92,11 +92,22 @@
 		5048396D09E3307300765E4B /* 3D BoA EditorProj.xcconfig */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xcconfig; path = "3D BoA EditorProj.xcconfig"; sourceTree = "<group>"; };
 		5048396E09E3307300765E4B /* 3D BoA EditorTarget.xcconfig */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xcconfig; path = "3D BoA EditorTarget.xcconfig"; sourceTree = "<group>"; };
 		508344B209E5C41E0093A071 /* 3D BoA Editor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "3D BoA Editor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		552773291C09A153006ECF91 /* keydlgs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = keydlgs.h; sourceTree = "<group>"; };
+		5527732A1C0A07D8006ECF91 /* townout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = townout.h; sourceTree = "<group>"; };
 		5598BAF81C08D85100D27BDB /* Bl A Sounds.r */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; path = "Bl A Sounds.r"; sourceTree = "<group>"; };
 		5598BAFB1C08D8D600D27BDB /* Dungeon Bold.r */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; path = "Dungeon Bold.r"; sourceTree = "<group>"; };
 		5598BAFD1C08DD4100D27BDB /* Bl A Patterns.r */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; path = "Bl A Patterns.r"; sourceTree = "<group>"; };
 		5598BAFF1C08DE7300D27BDB /* Bl A Icons.r */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; path = "Bl A Icons.r"; sourceTree = "<group>"; };
 		5598BB021C08E1DD00D27BDB /* Bl A Dialogs and Windows.r */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; path = "Bl A Dialogs and Windows.r"; sourceTree = "<group>"; };
+		5598BB041C08E4F300D27BDB /* sound.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = sound.hpp; sourceTree = "<group>"; };
+		5598BB051C08E59900D27BDB /* Library.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Library.hpp; sourceTree = "<group>"; };
+		5598BB061C08E63300D27BDB /* EdParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EdParser.h; sourceTree = "<group>"; };
+		5598BB071C08E92A00D27BDB /* EdUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EdUtils.h; sourceTree = "<group>"; };
+		55F3BF021C08EAB600D33F5B /* EdGlobal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EdGlobal.h; sourceTree = "<group>"; };
+		55F3BF031C08EC3400D33F5B /* FileIO.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FileIO.hpp; sourceTree = "<group>"; };
+		55F3BF041C08ECFD00D33F5B /* EdFcns.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EdFcns.h; sourceTree = "<group>"; };
+		55F3BF051C08F4FE00D33F5B /* dlogtool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dlogtool.h; sourceTree = "<group>"; };
+		55F3BF061C08F72600D33F5B /* Graphics.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Graphics.hpp; sourceTree = "<group>"; };
 		8D0C4E960486CD37000505A6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D2E6DC3152FEFF600E5C046 /* Undo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Undo.h; sourceTree = "<group>"; };
 		9D2E6DC6152FF00700E5C046 /* Undo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Undo.cpp; sourceTree = "<group>"; };
@@ -197,9 +208,20 @@
 			isa = PBXGroup;
 			children = (
 				32DBCF6D0370B57F00C91783 /* 3D BoA Editor_Prefix.pch */,
+				55F3BF051C08F4FE00D33F5B /* dlogtool.h */,
+				55F3BF041C08ECFD00D33F5B /* EdFcns.h */,
+				55F3BF021C08EAB600D33F5B /* EdGlobal.h */,
+				5598BB061C08E63300D27BDB /* EdParser.h */,
+				5598BB071C08E92A00D27BDB /* EdUtils.h */,
+				55F3BF031C08EC3400D33F5B /* FileIO.hpp */,
 				9DF52BC912CFC71800D01803 /* global.h */,
+				552773291C09A153006ECF91 /* keydlgs.h */,
+				55F3BF061C08F72600D33F5B /* Graphics.hpp */,
+				5598BB051C08E59900D27BDB /* Library.hpp */,
+				5598BB041C08E4F300D27BDB /* sound.hpp */,
 				9DF52BCA12CFC71800D01803 /* tokntype.h */,
 				9D2E6DC3152FEFF600E5C046 /* Undo.h */,
+				5527732A1C0A07D8006ECF91 /* townout.h */,
 			);
 			name = Headers;
 			path = Sources;

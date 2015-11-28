@@ -2,6 +2,7 @@
 //#include "math.h"
 //#include <OSUtils.h>
 #include "global.h"
+#include "EdGlobal.h"
 
 short get_ran (short times,short  min,short  max)
 {
@@ -24,34 +25,4 @@ short dist(location p1,location p2)
 {
 	return (short) sqrt((double)((p1.x - p2.x) * (p1.x - p2.x) +
 							(p1.y - p2.y) * (p1.y - p2.y)));
-}
-
-short max(short a,short b)
-{
-	if (a > b)
-		return a;
-	else
-		return b;
-}
-
-short min(short a,short b)
-{
-	if (a < b)
-		return a;
-	else
-		return b;
-}
-
-short minmax(short min,short max,short k)
-{
-	if (k < min)
-		return min;
-	if (k > max)
-		return max;
-	return k;
-}
-
-Boolean same_point(location l1,location l2)
-{
-	return((l1.x == l2.x) && (l1.y == l2.y));
 }

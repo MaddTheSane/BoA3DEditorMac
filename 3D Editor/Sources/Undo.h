@@ -12,6 +12,7 @@
 #include <algorithm>
 #include <deque>
 #include <string>
+#include "EdParser.h"
 #include "global.h"
 
 namespace Undo{

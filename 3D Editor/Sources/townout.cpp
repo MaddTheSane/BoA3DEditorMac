@@ -7,7 +7,14 @@
 //#include <stdio.h>
 //#include <string.h>
 #include "global.h"
+#include "EdGlobal.h"
+#include "EdFcns.h"
 #include "Undo.h"
+#include "FileIO.hpp"
+#include "Graphics.hpp"
+#include "dlogtool.h"
+#include "keydlgs.h"
+#include "townout.h"
 
 extern ModalFilterUPP main_dialog_UPP;
 extern short cen_x, cen_y;
@@ -55,6 +62,25 @@ static short store_max_x,store_max_y;
 
 static item_storage_shortcut_type store_storage;
 static short cur_shortcut;
+
+#pragma mark -
+
+static void put_placed_monst_in_dlog();
+static Boolean get_placed_monst_in_dlog();
+static void put_out_wand_in_dlog();
+static Boolean get_out_wand_in_dlog();
+static Boolean save_town_details();
+static void put_town_details_in_dlog();
+static Boolean save_town_wand();
+static void put_scen_details_in_dlog();
+static Boolean save_scen_details();
+static short edit_make_scen_2(short *val_array);
+static void put_make_scen_2_in_dlog();
+static short edit_make_scen_1(char *filename,char *title,short *start_on_surface);
+static void put_make_scen_1_in_dlog();
+static void put_add_town_in_dlog();
+
+#pragma mark -
 
 void put_placed_monst_in_dlog()
 {
@@ -1181,7 +1207,7 @@ Boolean edit_area_rect_str(short which_str,short mode)
 	return dialog_answer;
 }
 
-Boolean save_out_strs()
+static Boolean save_out_strs()
 {
 	Str255 str;
 	short i;
@@ -1201,7 +1227,7 @@ Boolean save_out_strs()
 	return TRUE;
 }
 
-void put_out_strs_in_dlog()
+static void put_out_strs_in_dlog()
 {
 	Str255 str;
 	short i;
@@ -1261,7 +1287,7 @@ void edit_out_strs()
 }
 
 
-Boolean save_town_strs()
+static Boolean save_town_strs()
 {
 	Str255 str;
 	short i;
@@ -1281,7 +1307,7 @@ Boolean save_town_strs()
 	return TRUE;
 }
 
-void put_town_strs_in_dlog()
+static void put_town_strs_in_dlog()
 {
 	Str255 str;
 	short i;
@@ -1339,7 +1365,7 @@ void edit_town_strs()
 }
 
 
-Boolean save_item_placement()
+static Boolean save_item_placement()
 {
 	short i;
 	
@@ -1354,7 +1380,7 @@ Boolean save_item_placement()
 	return TRUE;
 }
 
-void put_item_placement_in_dlog()
+static void put_item_placement_in_dlog()
 {
 	short i;
 	
@@ -1430,7 +1456,7 @@ void edit_item_placement()
 	cd_kill_dialog(812,0);
 }
 
-Boolean save_add_town()
+static Boolean save_add_town()
 {
 	short i;
 	

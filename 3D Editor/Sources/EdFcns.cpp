@@ -7,9 +7,18 @@
 //#include <math.h>
 //#include <stdio.h>
 //#include <string.h>
+#include "sound.hpp"
 #include "global.h"
+#include "EdGlobal.h"
+#include "EdFcns.h"
 #include <stdexcept>
+#include "EdUtils.h"
+#include "FileIO.hpp"
+#include "dlogtool.h"
 #include "Undo.h"
+#include "Graphics.hpp"
+#include "keydlgs.h"
+#include "townout.h"
 
 #define	MAX_RECURSION_DEPTH	200
 

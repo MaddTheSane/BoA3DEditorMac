@@ -38,8 +38,45 @@
 //#include <QDOffscreen.h>
 //#include "string.h"
 //#include "stdio.h"
+#include "Library.hpp"
+#include "EdParser.h"
 #include "global.h"
+#include "EdUtils.h"
+#include "EdGlobal.h"
+#include "EdFcns.h"
+#include "FileIO.hpp"
+#include "dlogtool.h"
+#include "Graphics.hpp"
+#include "keydlgs.h"
+#include "townout.h"
 //#include <ctype.h>
+
+static void boe_port_out(old_blades_outdoor_record_type *out);
+static void boe_flip_spec_node(old_blades_special_node_type *spec);
+static void port_a_special_node(old_blades_special_node_type *node,short node_num,short file_id,short node_type);
+static void port_boe_scenario_data();
+static void port_boe_out_data() ;
+static Boolean is_old_road(short i,short j);
+static Boolean is_old_wall(short ter);
+static void port_boe_town_data(short which_town,Boolean is_mac_scen) ;
+static void boe_port_talk_nodes();
+static void boe_port_town();
+static void boe_port_t_d();
+static void boe_port_scenario();
+static void boe_port_item_list();
+
+static void port_scenario_script(Str255 script_name,SInt32 directory_id);
+static void port_town_script(Str255 script_name,SInt32 directory_id,short which_town);
+static void port_outdoor_script(Str255 script_name,SInt32 directory_id,short sector_x,short sector_y);
+static void port_town_dialogue_script(Str255 script_name,SInt32 directory_id,short which_town);
+static void port_dialogue_intro_text(short *current_dialogue_node,short which_slot,FSIORefNum file_id,short town_being_ported);
+static void port_dialogue_node(short *current_dialogue_node,short which_slot,FSIORefNum file_id,short which_node,short town_being_ported);
+
+static void load_outdoor_borders(location which_out);
+static void load_all_outdoor_names(FSSpec* to_open);
+static void oops_error(short error);
+static Boolean copy_script(const char *script_source_name,const char *script_dest_name);
+
 
 #define	DONE_BUTTON_ITEM	1
 #define IN_FRONT	(WindowPtr)-1L
@@ -355,17 +392,17 @@ static short old_item_to_new_item[400] =
 };
 
 
-bool read_BoAFilesFolder_from_Pref( FSSpec * boaFolder );
-void write_BoAFilesFolder_to_Pref( FSSpec * boaFolder );
-void setup_startDirVol_from_defaultFolder( void );
-bool check_BoAFilesFolder( void );
-bool init_directories_with_pref( void );
-bool init_directories_with_appl_folder( void );
-bool init_directories_with_user_input( void );
-void print_write_position ();
-Boolean open_scenario_save_file( short * file_id, char *file_name, FSSpec *spec, short err_code, short beep_duration);
+static bool read_BoAFilesFolder_from_Pref( FSSpec * boaFolder );
+static void write_BoAFilesFolder_to_Pref( FSSpec * boaFolder );
+static void setup_startDirVol_from_defaultFolder( void );
+static bool check_BoAFilesFolder( void );
+static bool init_directories_with_pref( void );
+static bool init_directories_with_appl_folder( void );
+static bool init_directories_with_user_input( void );
+static void print_write_position ();
+static Boolean open_scenario_save_file( short * file_id, char *file_name, FSSpec *spec, short err_code, short beep_duration);
 
-OSErr GetApplicationPackageFSSpecFromBundle(FSSpecPtr theFSSpecPtr)
+static OSErr GetApplicationPackageFSSpecFromBundle(FSSpecPtr theFSSpecPtr)
 {
 	OSErr err = fnfErr;
 	CFBundleRef myAppsBundle = CFBundleGetMainBundle();
@@ -749,7 +786,7 @@ bool init_directories_with_user_input( void )
 	return result;
 }
 
-void open_BOA_resources( const char * theResFile )
+static void open_BOA_resources( const char * theResFile )
 {
 	Str255 resFile;
 	char msg[256];
@@ -4051,7 +4088,7 @@ void boe_flip_spec_node(old_blades_special_node_type *spec)
 }
 
 // SPECIAL NODE/DIALOGUE PORTING FCNS
-void port_scenario_script(Str255 script_name,long directory_id)
+void port_scenario_script(Str255 script_name,SInt32 directory_id)
 {
 	FSSpec new_scen_file;
 	short file_id;
@@ -4142,7 +4179,7 @@ void port_scenario_script(Str255 script_name,long directory_id)
 
 }
 
-void port_town_script(Str255 script_name,long directory_id,short which_town)
+void port_town_script(Str255 script_name,SInt32 directory_id,short which_town)
 {
 	FSSpec new_scen_file;
 	short file_id;
@@ -4235,7 +4272,7 @@ void port_town_script(Str255 script_name,long directory_id,short which_town)
 
 }
 
-void port_town_dialogue_script(Str255 script_name,long directory_id,short which_town)
+void port_town_dialogue_script(Str255 script_name,SInt32 directory_id,short which_town)
 {
 	FSSpec new_scen_file;
 	short file_id;
@@ -4300,7 +4337,7 @@ void port_town_dialogue_script(Str255 script_name,long directory_id,short which_
 }
 
 
-void port_outdoor_script(Str255 script_name,long directory_id,short sector_x,short sector_y)
+void port_outdoor_script(Str255 script_name,SInt32 directory_id,short sector_x,short sector_y)
 {
 	FSSpec new_script_file;
 	short file_id;
@@ -5308,7 +5345,7 @@ void port_a_special_node(old_blades_special_node_type *node,short node_num,short
 */
 
 // which_slot is 0 .. 9. it is which of the 10 personalities in the town being ported
-void port_dialogue_intro_text(short *current_dialogue_node,short which_slot,short file_id,short town_being_ported)
+void port_dialogue_intro_text(short *current_dialogue_node,short which_slot,FSIORefNum file_id,short town_being_ported)
 {
 	char str[256];
 	
@@ -5357,7 +5394,7 @@ void port_dialogue_intro_text(short *current_dialogue_node,short which_slot,shor
 
 }
 
-void port_dialogue_node(short *current_dialogue_node,short which_slot,short file_id,short which_node,short town_being_ported)
+void port_dialogue_node(short *current_dialogue_node,short which_slot,FSIORefNum file_id,short which_node,short town_being_ported)
 {
 	char str[256],str2[256],str3[256];
 
@@ -5711,7 +5748,7 @@ void port_dialogue_node(short *current_dialogue_node,short which_slot,short file
 	add_cr(file_id);
 }
 
-void handle_messages(short file_id,short node_type,short message_1,short message_2)
+void handle_messages(FSIORefNum file_id,short node_type,short message_1,short message_2)
 {
 	char str1[400] = "",str2[400] = "";
 	
@@ -5752,7 +5789,7 @@ void get_bl_str(char *str,short str_type,short str_num)
 			str[i] = '_';
 }
 
-void add_short_string_to_file(short file_id,const char *str1,short num,const char *str2)
+void add_short_string_to_file(FSIORefNum file_id,const char *str1,short num,const char *str2)
 {
 	char message[400];
 	
@@ -5763,7 +5800,7 @@ void add_short_string_to_file(short file_id,const char *str1,short num,const cha
 	add_string_to_file(file_id,message);
 	add_cr(file_id);
 }
-void add_big_string_to_file(short file_id,const char *str1,short num1,const char *str2,short num2,const char *str3,short num3,const char *str4)
+void add_big_string_to_file(FSIORefNum file_id,const char *str1,short num1,const char *str2,short num2,const char *str3,short num3,const char *str4)
 {
 	char message[400];
 	
@@ -5780,13 +5817,13 @@ void add_big_string_to_file(short file_id,const char *str1,short num1,const char
 	add_cr(file_id);
 }
 
-void add_string(short file_id,const char *str)
+void add_string(FSIORefNum file_id,const char *str)
 {
 	add_string_to_file(file_id,str);
 	add_cr(file_id);
 }
 
-void add_string_to_file(short file_id,const char *str)
+void add_string_to_file(FSIORefNum file_id,const char *str)
 {
 	if (strlen(str) == 0)
 		return;
@@ -5803,7 +5840,7 @@ void add_string_to_file(short file_id,const char *str)
 	FSWrite(file_id, &len, str);
 }
 
-void add_cr(short file_id)
+void add_cr(FSIORefNum file_id)
 {
 	add_string_to_file(file_id,"\r");
 }
@@ -5861,7 +5898,7 @@ static pascal Boolean NavFileBoAFilterProc (AEDesc* theItem, void* info, NavCall
 		if(descData == NULL)
 			return(false);
 		AEGetDescData(theItem,descData,AEGetDescDataSize(theItem));
-		if(descData->name == NULL){
+		if(descData->name[0] == 0) {
 			free(descData);
 			return(false);
 		}
@@ -5871,7 +5908,7 @@ static pascal Boolean NavFileBoAFilterProc (AEDesc* theItem, void* info, NavCall
 		char* extension=strrchr((char*)name,'.');
 		if(extension==NULL)
 			return(false);
-		if(strcmp(".bas",extension)==0){
+		if(strcmp(".bas",extension)==0) {
 			display=true;
 		}
 	}
@@ -5896,7 +5933,7 @@ static pascal Boolean NavFileBoEFilterProc (AEDesc* theItem, void* info, NavCall
 		if(descData == NULL)
 			return(false);
 		AEGetDescData(theItem,descData,AEGetDescDataSize(theItem));
-		if(descData->name == NULL){
+		if(descData->name[0] == 0){
 			free(descData);
 			return(false);
 		}

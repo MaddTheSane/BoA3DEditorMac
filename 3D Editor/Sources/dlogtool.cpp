@@ -41,7 +41,25 @@
 //#include <Events.h>
 //#include "stdio.h"
 //#include "string.h"
+#include "sound.hpp"
 #include "global.h"
+#include "EdGlobal.h"
+#include "dlogtool.h"
+#include "Graphics.hpp"
+#include "keydlgs.h"
+
+static void frame_dlog_rect(GrafPtr hDlg, Rect rect, short val);
+static Rect get_item_rect(WindowPtr hDlg, short item_num);
+static short cd_get_item_id(short dlg_num, short item_num);
+static short cd_find_dlog(WindowPtr window, short *dlg_num, short *dlg_key);
+static short cd_get_dlg_index(short dlog_num);
+static short cd_get_indices(short dlg_num, short item_num, short *dlg_index, short *item_index);
+static void cd_press_button(short dlog_num, short item_num, EDLGBtnRes mode );
+static void cd_erase_item(short dlog_num, short item_num);
+static void cd_frame_item(short dlog_num, short item_num, short width);
+static void process_new_window (WindowPtr hDlg);
+static short cd_create_dialog(short dlog_num,WindowPtr parent);
+static short cd_process_mousetrack( short dlog_num, short item_num, Rect theRect );
 
 #define	NUM_DLOG_B		53
 #define	DIALOG_PIXEL_ADJUST		6

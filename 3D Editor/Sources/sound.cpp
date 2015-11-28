@@ -5,7 +5,7 @@
 //#include <Memory.h>
 //#include <OSUtils.h>
 
-//#include "sound.h"
+#include "sound.hpp"
 #include "global.h"
 
 #define	NUM_SOUNDS	99

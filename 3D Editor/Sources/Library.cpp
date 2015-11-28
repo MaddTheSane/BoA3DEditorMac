@@ -14,6 +14,7 @@
 
 //#include "stdio.h"
 //#include "string.h"
+#include "Library.hpp"
 #include "global.h"
 
 extern short max_zone_dim[3];// = {64,48,32};

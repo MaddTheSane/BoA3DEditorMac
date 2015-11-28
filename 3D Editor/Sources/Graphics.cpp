@@ -1,6 +1,13 @@
+#include <QuickTime/QuickTime.h>
 #include "global.h"
-#include "QuickTime/QuickTime.h"
+#include "EdGlobal.h"
+#include "EdFcns.h"
+#include "FileIO.hpp"
+#include "EdUtils.h"
+#include "Graphics.hpp"
+#include "dlogtool.h"
 #include "Undo.h"
+#include "keydlgs.h"
 
 extern scenario_data_type scenario;
 extern zone_names_data_type zone_names;
@@ -166,6 +173,51 @@ const Rect tint_rect = {0,0,PICT_BOX_HEIGHT_3D,PICT_BOX_WIDTH_3D};
 
 bool setUpCreaturePalette = false;
 bool setUpItemPalette = false;
+
+static void delete_graphic(GWorldPtr *to_delete);
+static GWorldPtr load_pict(int picture_to_get);
+static Boolean place_terrain_icon_into_ter_large(graphic_id_type icon,short in_square_x,short in_square_y);
+static void draw_wall_3D_sidebar(short t_to_draw, Rect to_rect);
+static Boolean place_icon_into_3D_sidebar(graphic_id_type icon, Rect to_rect, short unscaled_offset_x, short unscaled_offset_y);
+static Boolean place_icon_into_ter_3D_large(graphic_id_type icon,short at_point_center_x,short at_point_center_y,Rect *to_whole_area_rect,short lighting,bool selected=false);
+static Boolean place_creature_icon_into_ter_3D_large(graphic_id_type icon,short at_point_center_x,short at_point_center_y,Rect *to_whole_area_rect,short lighting,short r,short g,short b,bool selected=false);
+static Boolean place_cliff_icon_into_ter_3D_large(short sheet,short at_point_center_x,short at_point_center_y,
+												  short direction,Rect *to_whole_area_rect,short lighting);//direction:   0: east/west 1: NW/SE 2:north/south
+static Boolean place_item_icon_into_ter_3D_large(graphic_id_type icon,short at_point_center_x,short at_point_center_y,Rect *to_whole_area_rect,short lighting,bool selected);
+static Boolean place_outdoor_creature_icon_into_ter_3D_large(graphic_id_type icon,short at_point_center_x,short at_point_center_y,Rect *to_whole_area_rect,short lighting);
+static Boolean place_corner_wall_icon_into_ter_3D_large(graphic_id_type icon,short at_point_center_x,short at_point_center_y,Boolean left_side_of_template,Rect *to_whole_area_rect,short lighting);
+static void place_ter_icon_on_tile_3D(short at_point_center_x,short at_point_center_y,short position,short which_icon,Rect *to_whole_area_rect,bool selected=false);
+static void draw_ter_script_3D(short at_point_center_x,short at_point_center_y,Rect *to_whole_area_rect,bool selected);
+static void place_ter_icons_3D(location which_outdoor_sector, outdoor_record_type *drawing_terrain, short square_x, short square_y, short t_to_draw, short floor_to_draw, short at_point_center_x,short at_point_center_y,Rect *to_whole_area_rect);
+static void draw_ter_icon_3D(short terrain_number,short icon_number,short x,short y,graphic_id_type a,short t_to_draw,Rect *to_whole_area_rect,short lighting,short height,bool selected=false);
+static void draw_terrain_3D(short t_to_draw, short x, short y, short sector_x, short sector_y, short at_point_center_x, short at_point_center_y, Boolean see_in_neighbors[3][3], Boolean is_wall_corner,Rect *to_whole_area_rect,short lighting,bool selected=false);
+static void draw_creature_3D(short creature_num,short at_point_center_x,short at_point_center_y, short square_x, short square_y,Rect *to_whole_area_rect,short lighting,bool selected=false);
+static void draw_item_3D(short item_num,short at_point_center_x,short at_point_center_y, short square_x, short square_y,Rect *to_whole_area_rect,short lighting,bool selected=false);
+static void put_line_segment_in_gworld_3D(GWorldPtr line_gworld,outdoor_record_type *drawing_terrain,short at_point_center_3D_x,short at_point_center_3D_y,
+								   short square_2D_x, short square_2D_y, short line_on_2D_x_side, short line_on_2D_y_side, Boolean corner_label_x,
+								   Boolean corner_label_y, short inset_3D_y, short offset_3D_y,short r,short g, short b,Rect *to_whole_area_rect);
+static void maybe_draw_part_of_3D_rect(outdoor_record_type *drawing_terrain, short center_of_current_square_x, short center_of_current_square_y, short x, short y,
+								Rect rect, short inset, short r, short g, short b,Rect *to_whole_area_rect);
+static void draw_town_objects_3D(short x, short y, short at_point_center_x, short at_point_center_y,Rect *to_whole_area_rect,short lighting);
+static void draw_ter_3D_large();
+static void draw_ter_large();
+static void draw_view_buttons();
+static void win_draw_string(GrafPtr dest_window,Rect dest_rect,Str255 str,short mode,short line_height);
+static void apply_lighting_to_graphic(GWorldPtr *src_gworld_ptr, Rect *from_rect_ptr, short lighting);
+static void add_border_to_graphic(GWorldPtr *src_gworld_ptr, Rect *from_rect_ptr, short border_r, short border_g, short border_b);
+static void adjust_graphic(GWorldPtr *src_gworld_ptr, Rect *from_rect_ptr, short graphic_adjust/*,
+																								short light_level, Boolean has_border, short border_r, short border_g, short border_b*/);
+static void put_rect_in_gworld(GWorldPtr line_gworld,Rect rect,short r,short g, short b);
+static void fill_rect_in_gworld(GWorldPtr line_gworld,Rect to_rect,short r,short g, short b);
+static void put_line_in_gworld(GWorldPtr line_gworld,short from_x,short from_y,short to_x,short to_y,short r,short g, short b);
+static void put_rect_on_screen(WindowPtr win,Rect to_rect,short r,short g, short b);
+static void put_line_on_screen(short from_x,short from_y,short to_x,short to_y,short r,short g, short b);
+static void put_clipped_rect_on_screen(WindowPtr win,Rect to_rect,Rect clip_rect,short r,short g, short b);
+static void put_clipped_rect_in_gworld(GWorldPtr line_gworld,Rect to_rect,Rect clip_rect,short r,short g, short b);
+static Boolean load_sheet_into_library(graphic_id_type *new_sheet);
+static short get_index_of_sheet(graphic_id_type *sheet);
+static short safe_get_index_of_sheet(graphic_id_type *sheet);
+
 
 void Get_right_sbar_rect( Rect * rect )
 {
@@ -774,13 +826,13 @@ Rect terrainViewRect(){
 	return(r);
 }
 
-Rect largeTileScreenRect(int xIdx, int yIdx){
+static Rect largeTileScreenRect(int xIdx, int yIdx){
 	Rect r={TERRAIN_BORDER_WIDTH + yIdx * BIG_SPACE_SIZE,TERRAIN_BORDER_WIDTH + xIdx * BIG_SPACE_SIZE,
 		TERRAIN_BORDER_WIDTH + (yIdx + 1) * BIG_SPACE_SIZE,TERRAIN_BORDER_WIDTH + (xIdx + 1) * BIG_SPACE_SIZE};
 	return(r);
 }
 
-Rect smallTileScreenRect(int xIdx, int yIdx){
+static Rect smallTileScreenRect(int xIdx, int yIdx){
 	Rect r={yIdx * SMALL_SPACE_SIZE,xIdx * SMALL_SPACE_SIZE,
 		(yIdx + 1) * SMALL_SPACE_SIZE,(xIdx + 1) * SMALL_SPACE_SIZE};
 	return(r);

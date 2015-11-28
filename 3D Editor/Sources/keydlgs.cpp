@@ -8,6 +8,10 @@
 //#include <string.h>
 //#include <ctype.h>
 #include "global.h"
+#include "EdGlobal.h"
+#include "dlogtool.h"
+#include "Graphics.hpp"
+#include "keydlgs.h"
 
 extern Boolean dialog_not_toast;
 extern short cur_viewing_mode;

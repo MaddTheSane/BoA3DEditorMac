@@ -10,6 +10,9 @@
 //#include "string.h"
 //#include "stdio.h"
 #include "global.h"
+#include "EdParser.h"
+#include "EdUtils.h"
+#include "Graphics.hpp"
 #include <vector>
 
 extern town_record_type town;
