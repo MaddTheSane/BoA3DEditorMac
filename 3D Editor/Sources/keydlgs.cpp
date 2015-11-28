@@ -1,12 +1,6 @@
-//#include <Carbon/Carbon.h>	// included in pre-compiled header
-//#include <QDOffscreen.h>
-//#include <Quickdraw.h>
-//#include <Dialogs.h>
-//#include <TextUtils.h>
-//#include <OSUtils.h>
-//#include <stdio.h>
-//#include <string.h>
-//#include <ctype.h>
+#include <Carbon/Carbon.h>	
+#include <stdio.h>
+#include <string.h>
 #include "global.h"
 #include "EdGlobal.h"
 #include "dlogtool.h"

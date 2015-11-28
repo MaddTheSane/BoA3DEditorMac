@@ -34,13 +34,9 @@
 
 // Of course, you can just ignore all this mess and write regular dialog boxes.
 
-//#include <Carbon/Carbon.h>	// included in pre-compiled header
-//#include <TextUtils.h>
-//#include <QDOffscreen.h>
-//#include <Quickdraw.h>
-//#include <Events.h>
-//#include "stdio.h"
-//#include "string.h"
+#include <Carbon/Carbon.h>	
+#include <string.h>
+#include <stdio.h>
 #include "sound.hpp"
 #include "global.h"
 #include "EdGlobal.h"

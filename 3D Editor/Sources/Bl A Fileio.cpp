@@ -23,21 +23,9 @@
  of critical bugs in the editor's byte-swapping logic suggests that likely cannot). 
  */
 
-//#include <Carbon/Carbon.h>	// included in pre-compiled header
-//#include <Memory.h>
-//#include <Quickdraw.h>
-//#include <Fonts.h>
-//#include <Events.h>
-//#include <Menus.h>
-//#include <Windows.h>
-//#include <TextEdit.h>
-//#include <Dialogs.h>
-//#include <OSUtils.h>
-//#include <ToolUtils.h>
-//#include <TextUtils.h>
-//#include <QDOffscreen.h>
-//#include "string.h"
-//#include "stdio.h"
+#include <Carbon/Carbon.h>
+#include <string.h>
+#include <stdio.h>
 #include "Library.hpp"
 #include "EdParser.h"
 #include "global.h"
@@ -49,7 +37,6 @@
 #include "Graphics.hpp"
 #include "keydlgs.h"
 #include "townout.h"
-//#include <ctype.h>
 
 static void boe_port_out(old_blades_outdoor_record_type *out);
 static void boe_flip_spec_node(old_blades_special_node_type *spec);

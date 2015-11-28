@@ -215,13 +215,13 @@
 				5598BB071C08E92A00D27BDB /* EdUtils.h */,
 				55F3BF031C08EC3400D33F5B /* FileIO.hpp */,
 				9DF52BC912CFC71800D01803 /* global.h */,
-				552773291C09A153006ECF91 /* keydlgs.h */,
 				55F3BF061C08F72600D33F5B /* Graphics.hpp */,
+				552773291C09A153006ECF91 /* keydlgs.h */,
 				5598BB051C08E59900D27BDB /* Library.hpp */,
 				5598BB041C08E4F300D27BDB /* sound.hpp */,
 				9DF52BCA12CFC71800D01803 /* tokntype.h */,
-				9D2E6DC3152FEFF600E5C046 /* Undo.h */,
 				5527732A1C0A07D8006ECF91 /* townout.h */,
+				9D2E6DC3152FEFF600E5C046 /* Undo.h */,
 			);
 			name = Headers;
 			path = Sources;

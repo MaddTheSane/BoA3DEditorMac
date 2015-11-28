@@ -9,6 +9,7 @@
 #ifndef EdParser_h
 #define EdParser_h
 
+#include <Carbon/Carbon.h>
 #include "Library.hpp"
 
 

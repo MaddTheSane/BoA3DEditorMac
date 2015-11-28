@@ -9,6 +9,7 @@
 #ifndef Library_h
 #define Library_h
 
+#include <Carbon/Carbon.h>
 #include "global.h"
 
 class graphic_id_type {

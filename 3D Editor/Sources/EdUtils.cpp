@@ -6,9 +6,9 @@
 
 // General utility functions.
 
-//#include <Carbon/Carbon.h>	// included in pre-compiled header
-//#include "string.h"
-//#include "stdio.h"
+#include <Carbon/Carbon.h>	
+#include <string.h>
+#include <stdio.h>
 #include "global.h"
 #include "EdParser.h"
 #include "EdUtils.h"

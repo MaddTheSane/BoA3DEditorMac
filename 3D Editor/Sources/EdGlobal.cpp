@@ -1,6 +1,5 @@
-//#include <Carbon/Carbon.h>	// included in pre-compiled header
-//#include "math.h"
-//#include <OSUtils.h>
+#include <Carbon/Carbon.h>
+#include <math.h>
 #include "global.h"
 #include "EdGlobal.h"
 

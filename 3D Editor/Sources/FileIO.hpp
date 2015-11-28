@@ -9,6 +9,7 @@
 #ifndef FileIO_h
 #define FileIO_h
 
+#include <Carbon/Carbon.h>
 #include "global.h"
 
 void open_Appl_resource( const char * rsrc_file );

@@ -9,6 +9,7 @@
 #ifndef EdUtils_h
 #define EdUtils_h
 
+#include <Carbon/Carbon.h>
 #include "global.h"
 
 void RedAlert_c (char *theStr);

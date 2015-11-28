@@ -9,6 +9,7 @@
 #ifndef Graphics_h
 #define Graphics_h
 
+#include <Carbon/Carbon.h>
 #include "global.h"
 
 void Get_right_sbar_rect( Rect * rect );

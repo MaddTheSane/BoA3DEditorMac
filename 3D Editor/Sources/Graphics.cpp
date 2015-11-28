@@ -1,3 +1,4 @@
+#include <Carbon/Carbon.h>
 #include <QuickTime/QuickTime.h>
 #include "global.h"
 #include "EdGlobal.h"

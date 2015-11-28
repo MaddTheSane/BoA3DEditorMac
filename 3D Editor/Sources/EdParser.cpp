@@ -11,11 +11,10 @@
 // Some of this stuff is actually code from the game, and is commented out.
 // Might make interesting reading.
 
-//#include <Carbon/Carbon.h>	// included in pre-compiled header
-//#include "string.h"
-//#include "stdio.h"
-//#include "stdlib.h"
-//#include <ctype.h>
+#include <Carbon/Carbon.h>	
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "global.h"
 #include "EdGlobal.h"
 #include "EdParser.h"

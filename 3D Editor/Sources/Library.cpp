@@ -1,19 +1,7 @@
-//#include <Carbon/Carbon.h>	// included in pre-compiled header
-//#include <Memory.h>
-//#include <Quickdraw.h>
-//#include <QuickdrawText.h>
-//#include <Fonts.h>
-//#include <Events.h>
-//#include <Menus.h>
-//#include <Windows.h>
-//#include <Dialogs.h>
-//#include <Resources.h>
-//#include <OSUtils.h>
-//#include <TextUtils.h>
-//#include <QDOffscreen.h>
+#include <Carbon/Carbon.h>	
 
-//#include "stdio.h"
-//#include "string.h"
+#include <stdio.h>
+#include <string.h>
 #include "Library.hpp"
 #include "global.h"
 

@@ -9,6 +9,7 @@
 #ifndef EdFcns_h
 #define EdFcns_h
 
+#include <Carbon/Carbon.h>
 #include "global.h"
 
 void init_screen_locs();

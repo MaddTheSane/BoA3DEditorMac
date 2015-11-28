@@ -30,21 +30,7 @@
 // dlogool.c - This is the custom dialog engine. There are comments on this in
 // that file.
 
-//#include <Carbon/Carbon.h>	// included in pre-compiled header
-//#include <Memory.h>
-//#include <Quickdraw.h>
-//#include <QuickdrawText.h>
-//#include <Fonts.h>
-//#include <Events.h>
-//#include <Menus.h>
-//#include <Windows.h>
-//#include <TextEdit.h>
-//#include <Dialogs.h>
-//#include <OSUtils.h>
-//#include <ToolUtils.h>
-//#include <stdio.h>
-//#include <QDOffscreen.h>
-//#include <Palettes.h>
+#include <Carbon/Carbon.h>
 
 #include <Sparkle/SUCarbonAPI.h>
 #include "sound.hpp"

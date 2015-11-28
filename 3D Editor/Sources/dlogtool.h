@@ -9,6 +9,7 @@
 #ifndef dlogtool_h
 #define dlogtool_h
 
+#include <Carbon/Carbon.h>
 #include "global.h"
 
 // dlogtool

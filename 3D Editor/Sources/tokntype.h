@@ -1,3 +1,6 @@
+
+#include "EdParser.h"
+
 #define NUM_BLOCK_DEFINERS	40
 #define NUM_VAR_DEFINERS	220
 #define NUM_ARRAY_VAR_DEFINERS	40

@@ -9,6 +9,7 @@
 #ifndef EdGlobal_h
 #define EdGlobal_h
 
+#include <Carbon/Carbon.h>
 #include <algorithm>
 #include "global.h"
 
