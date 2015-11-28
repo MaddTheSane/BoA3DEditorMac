@@ -473,11 +473,12 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 				);
-				GCC_PREFIX_HEADER = "3D BoA Editor_Prefix.pch";
+				GCC_PREFIX_HEADER = "3D Editor/Source Code/3D BoA Editor_Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"_GLIBCXX_DEBUG=1",
 					"_GLIBCXX_DEBUG_PEDANTIC=1",
 				);
+				INFOPLIST_FILE = "3D Editor/Resources/Info.plist";
 				VALID_ARCHS = i386;
 			};
 			name = Debug;
@@ -496,7 +497,8 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 				);
-				GCC_PREFIX_HEADER = "3D BoA Editor_Prefix.pch";
+				GCC_PREFIX_HEADER = "3D Editor/Source Code/3D BoA Editor_Prefix.pch";
+				INFOPLIST_FILE = "3D Editor/Resources/Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRESERVE_DEAD_CODE_INITS_AND_TERMS = YES;
 				VALID_ARCHS = i386;
