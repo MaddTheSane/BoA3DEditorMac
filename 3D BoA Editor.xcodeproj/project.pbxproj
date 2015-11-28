@@ -87,7 +87,7 @@
 
 /* Begin PBXFileReference section */
 		0867D6ABFE840B52C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		20286C33FDCF999611CA2CEA /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
+		20286C33FDCF999611CA2CEA /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		32DBCF6D0370B57F00C91783 /* 3D BoA Editor_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "3D BoA Editor_Prefix.pch"; sourceTree = "<group>"; };
 		5048396D09E3307300765E4B /* 3D BoA EditorProj.xcconfig */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xcconfig; path = "3D BoA EditorProj.xcconfig"; sourceTree = "<group>"; };
 		5048396E09E3307300765E4B /* 3D BoA EditorTarget.xcconfig */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xcconfig; path = "3D BoA EditorTarget.xcconfig"; sourceTree = "<group>"; };
@@ -113,7 +113,7 @@
 		9D2E6DC6152FF00700E5C046 /* Undo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Undo.cpp; sourceTree = "<group>"; };
 		9D3AB05C137E257000B4F413 /* mode_buttons.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mode_buttons.png; sourceTree = "<group>"; };
 		9D8A95FF141D4D9300B69D51 /* Blades of Avernum Editor License.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Blades of Avernum Editor License.pdf"; sourceTree = "<group>"; };
-		9DF52BC412CFC6DA00D01803 /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = /System/Library/Frameworks/QuickTime.framework; sourceTree = "<absolute>"; };
+		9DF52BC412CFC6DA00D01803 /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = System/Library/Frameworks/QuickTime.framework; sourceTree = SDKROOT; };
 		9DF52BC912CFC71800D01803 /* global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = global.h; sourceTree = "<group>"; };
 		9DF52BCA12CFC71800D01803 /* tokntype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tokntype.h; sourceTree = "<group>"; };
 		9DF52BD612CFC74D00D01803 /* Bl A Editor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "Bl A Editor.cpp"; sourceTree = "<group>"; };
