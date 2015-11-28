@@ -13,7 +13,6 @@
 		9D3AB05D137E257000B4F413 /* mode_buttons.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D3AB05C137E257000B4F413 /* mode_buttons.png */; };
 		9D8A9600141D4D9300B69D51 /* Blades of Avernum Editor License.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9D8A95FF141D4D9300B69D51 /* Blades of Avernum Editor License.pdf */; };
 		9DF52BC612CFC6DA00D01803 /* QuickTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DF52BC412CFC6DA00D01803 /* QuickTime.framework */; };
-		9DF52BC712CFC6DA00D01803 /* libstdc++-static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DF52BC512CFC6DA00D01803 /* libstdc++-static.a */; };
 		9DF52BE212CFC74D00D01803 /* Bl A Editor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9DF52BD612CFC74D00D01803 /* Bl A Editor.cpp */; };
 		9DF52BE312CFC74D00D01803 /* Bl A Fileio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9DF52BD712CFC74D00D01803 /* Bl A Fileio.cpp */; };
 		9DF52BE412CFC74D00D01803 /* dlogtool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9DF52BD812CFC74D00D01803 /* dlogtool.cpp */; };
@@ -94,7 +93,6 @@
 		9D3AB05C137E257000B4F413 /* mode_buttons.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mode_buttons.png; sourceTree = "<group>"; };
 		9D8A95FF141D4D9300B69D51 /* Blades of Avernum Editor License.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Blades of Avernum Editor License.pdf"; sourceTree = "<group>"; };
 		9DF52BC412CFC6DA00D01803 /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = /System/Library/Frameworks/QuickTime.framework; sourceTree = "<absolute>"; };
-		9DF52BC512CFC6DA00D01803 /* libstdc++-static.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libstdc++-static.a"; path = "/usr/lib/libstdc++-static.a"; sourceTree = "<absolute>"; };
 		9DF52BC912CFC71800D01803 /* global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = global.h; sourceTree = "<group>"; };
 		9DF52BCA12CFC71800D01803 /* tokntype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tokntype.h; sourceTree = "<group>"; };
 		9DF52BD612CFC74D00D01803 /* Bl A Editor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "Bl A Editor.cpp"; sourceTree = "<group>"; };
@@ -146,7 +144,7 @@
 		9DF52C1212CFCCA400D01803 /* BoAScen.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = BoAScen.icns; sourceTree = "<group>"; };
 		9DF52C1312CFCCA400D01803 /* Bl A Editor.r */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; path = "Bl A Editor.r"; sourceTree = "<group>"; };
 		9DF52C1412CFCCA400D01803 /* BoAEdAPPL.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = BoAEdAPPL.icns; sourceTree = "<group>"; };
-		9DF52CA312CFD5C500D01803 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
+		9DF52CA312CFD5C500D01803 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = "3D Editor/Sparkle.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,7 +154,6 @@
 			files = (
 				8D0C4E920486CD37000505A6 /* Carbon.framework in Frameworks */,
 				9DF52BC612CFC6DA00D01803 /* QuickTime.framework in Frameworks */,
-				9DF52BC712CFC6DA00D01803 /* libstdc++-static.a in Frameworks */,
 				9DF52CA412CFD5C500D01803 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -176,9 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				5048396909E3304600765E4B /* Configuration Files */,
-				20286C2AFDCF999611CA2CEA /* Headers */,
-				9DF52BD512CFC73700D01803 /* Sources */,
-				20286C2CFDCF999611CA2CEA /* Resources */,
+				554BFC261C0A597D0072D2CB /* 3D Editor */,
 				20286C32FDCF999611CA2CEA /* External Frameworks and Libraries */,
 				195DF8CFFE9D517E11CA2CBB /* Products */,
 			);
@@ -194,6 +189,7 @@
 				9D2E6DC3152FEFF600E5C046 /* Undo.h */,
 			);
 			name = Headers;
+			path = "Source Code";
 			sourceTree = "<group>";
 		};
 		20286C2CFDCF999611CA2CEA /* Resources */ = {
@@ -208,7 +204,7 @@
 				8D0C4E960486CD37000505A6 /* Info.plist */,
 				0867D6AAFE840B52C02AAC07 /* InfoPlist.strings */,
 			);
-			name = Resources;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		20286C32FDCF999611CA2CEA /* External Frameworks and Libraries */ = {
@@ -216,7 +212,6 @@
 			children = (
 				9DF52CA312CFD5C500D01803 /* Sparkle.framework */,
 				9DF52BC412CFC6DA00D01803 /* QuickTime.framework */,
-				9DF52BC512CFC6DA00D01803 /* libstdc++-static.a */,
 				20286C33FDCF999611CA2CEA /* Carbon.framework */,
 			);
 			name = "External Frameworks and Libraries";
@@ -229,6 +224,16 @@
 				5048396E09E3307300765E4B /* 3D BoA EditorTarget.xcconfig */,
 			);
 			name = "Configuration Files";
+			sourceTree = "<group>";
+		};
+		554BFC261C0A597D0072D2CB /* 3D Editor */ = {
+			isa = PBXGroup;
+			children = (
+				20286C2AFDCF999611CA2CEA /* Headers */,
+				9DF52BD512CFC73700D01803 /* Sources */,
+				20286C2CFDCF999611CA2CEA /* Resources */,
+			);
+			path = "3D Editor";
 			sourceTree = "<group>";
 		};
 		9DF52BD512CFC73700D01803 /* Sources */ = {
@@ -249,6 +254,7 @@
 				9D2E6DC6152FF00700E5C046 /* Undo.cpp */,
 			);
 			name = Sources;
+			path = "Source Code";
 			sourceTree = "<group>";
 		};
 		9DF52BF012CFCCA300D01803 /* image_resources */ = {
@@ -321,6 +327,8 @@
 /* Begin PBXProject section */
 		20286C28FDCF999611CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+			};
 			buildConfigurationList = C0E91AC908A95435008D54AB /* Build configuration list for PBXProject "3D BoA Editor" */;
 			compatibilityVersion = "Xcode 3.0";
 			developmentRegion = English;
@@ -499,8 +507,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5048396D09E3307300765E4B /* 3D BoA EditorProj.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_DEBUGGING_SYMBOLS = full;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -517,8 +524,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5048396D09E3307300765E4B /* 3D BoA EditorProj.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.3;
