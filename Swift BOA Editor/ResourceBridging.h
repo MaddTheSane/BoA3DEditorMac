@@ -19,6 +19,10 @@ NS_ASSUME_NONNULL_BEGIN
 + (nullable NSData*)resourceDataFromType:(OSType)type resID:(SInt16)resID;
 + (nullable NSImage*)PICTImageAtResID:(SInt16)resID;
 
+- (nullable NSData *)resourceDataFromType:(OSType)type resID:(SInt16)resID;
+- (nullable NSImage*)PICTImageAtResID:(SInt16)resID;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

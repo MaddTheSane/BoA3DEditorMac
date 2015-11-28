@@ -26,11 +26,13 @@ void ASB (const char *theStr)
 
 void ASB_big (const char *str1,const char *str2,const char *str3,const char *str4,short num,const char *str5)
 {
-	char str[256];
+	std::string str = "";
 	
-	if (num >= 0)
-		sprintf(str,"%s%s%s%s%d%s",str1,str2,str3,str4,num,str5);
-	else sprintf(str,"%s%s%s%s%s",str1,str2,str3,str4,str5);
+	if (num >= 0){
+		str += str1 + std::string(str2) + str3 + std::string(str4) + std::to_string(num) + str5;
+	} else {
+		str += str1 + std::string(str2) + str3 + std::string(str4) + str5;
+	}
 	//c2p(str);
 	//display_error_dialog(str,FALSE);
 	statStr.append(str); statStr.append("\n");
