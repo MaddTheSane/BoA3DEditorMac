@@ -29,6 +29,7 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
+<<<<<<< HEAD:3D BoA Editor.xcodeproj/xcshareddata/xcschemes/3D BoA Editor.xcscheme
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
@@ -38,6 +39,8 @@
             ReferencedContainer = "container:3D BoA Editor.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
+=======
+>>>>>>> reorganize:3D BoA Editor.xcodeproj/xcshareddata/xcschemes/3D BoA Editor.xcscheme
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -51,8 +54,12 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+<<<<<<< HEAD:3D BoA Editor.xcodeproj/xcshareddata/xcschemes/3D BoA Editor.xcscheme
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
+=======
+      <MacroExpansion>
+>>>>>>> reorganize:3D BoA Editor.xcodeproj/xcshareddata/xcschemes/3D BoA Editor.xcscheme
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8D0C4E890486CD37000505A6"
@@ -60,7 +67,7 @@
             BlueprintName = "3D BoA Editor"
             ReferencedContainer = "container:3D BoA Editor.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -70,8 +77,12 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+<<<<<<< HEAD:3D BoA Editor.xcodeproj/xcshareddata/xcschemes/3D BoA Editor.xcscheme
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
+=======
+      <MacroExpansion>
+>>>>>>> reorganize:3D BoA Editor.xcodeproj/xcshareddata/xcschemes/3D BoA Editor.xcscheme
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8D0C4E890486CD37000505A6"
@@ -79,7 +90,7 @@
             BlueprintName = "3D BoA Editor"
             ReferencedContainer = "container:3D BoA Editor.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
